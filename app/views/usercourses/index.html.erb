@@ -1,0 +1,11 @@
+
+<% if user_signed_in? %> 
+
+
+<h1><%= @user.email %></h1>
+
+    <% @user_courses.each do |course| %>
+      <h3><a href="/courses/<%=course.id%>"><%= course.name %></a></h3>
+    <% end %>
+
+<% end %>

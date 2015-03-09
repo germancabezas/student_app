@@ -1,0 +1,44 @@
+/* GENERALL STYLES*/
+
+/* Break points */
+$desktop: new-breakpoint(max-width 1400px 4);
+$laptop: new-breakpoint(max-width 900px 4);
+$tablet: new-breakpoint(max-width 700px 4);
+$mobile: new-breakpoint(max-width 480px 4);
+
+
+
+
+
+.container{
+  @include outer-container(90%);
+  padding-top: 20px;
+}
+.left_block {
+  @include span-columns(4);
+  @include media($mobile) {
+    @include span-columns(12);
+  }
+  @include media($laptop) {
+    @include span-columns(12);
+  }
+}
+.right_block {
+  @include span-columns(8);
+  @include media($mobile) {
+    @include span-columns(12);
+  }
+
+}
+
+button { 
+  @include button(pill);
+}
+
+
+
+.new-context-element {
+   @include media(min-width 320px max-width 480px, 6) {
+     @include span-columns(6);
+   }
+ }
