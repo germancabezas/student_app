@@ -28,17 +28,11 @@ $mobile: new-breakpoint(max-width 480px 4);
   @include media($mobile) {
     @include span-columns(12);
   }
-
 }
+
 
 button { 
   @include button(pill);
 }
 
 
-
-.new-context-element {
-   @include media(min-width 320px max-width 480px, 6) {
-     @include span-columns(6);
-   }
- }

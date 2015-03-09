@@ -9,6 +9,10 @@ class CoursesController < ApplicationController
     @course = Course.find(params[:id])
     @chapters = @course.chapters
 
+    @chapters.each do |chapter|
+      @lessons = chapter.lessons
+    end
+
   end
 
   def new
