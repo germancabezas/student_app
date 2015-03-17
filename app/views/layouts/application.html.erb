@@ -11,51 +11,56 @@
   <!-- Navigation -->
   <header class="navigation" role="banner">
     <div class="navigation-wrapper">
-      <a href="/" class="logo">
-        <img src="https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/placeholder_logo_1.png" alt="Logo Image">
+      <article class="type-system-sans"> 
+      <a href="/">
+        <img class="logo" src="http://s24.postimg.org/b3ezsi66t/logo.png">
       </a>
       <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">MENU</a>
       <nav role="navigation">
         <ul id="js-navigation-menu" class="navigation-menu show">
-          <li class="nav-link"><a href="/usercourses">My Courses</a></li>
-          <li class="nav-link"><a href="javascript:void(0)">About Us</a></li>
-          <li class="nav-link"><a href="javascript:void(0)">Contact</a></li>
-          <li class="nav-link more"><a href="javascript:void(0)">More</a>
-            <ul class="submenu">
-              <li><a href="javascript:void(0)">Submenu Item</a></li>
-              <li><a href="javascript:void(0)">Another Item</a></li>
-              <li class="more"><a href="javascript:void(0)">Item with submenu</a>
-                <ul class="submenu">
-                  <li><a href="javascript:void(0)">Sub-submenu Item</a></li>
-                  <li><a href="javascript:void(0)">Another Item</a></li>
-                </ul>
-              </li>
-              <li class="more"><a href="javascript:void(0)">Another submenu</a>
-                <ul class="submenu">
-                  <li><a href="javascript:void(0)">Sub-submenu</a></li>
-                  <li><a href="javascript:void(0)">An Item</a></li>
-                </ul>
-              </li>
-            </ul>
-          </li>
+          <li class="nav-link"><a href="#">About</a></li>
+          <li class="nav-link"><a href="/courses">Courses</a></li>
+          <li class="nav-link"><a href="/searches">Keyword Search</a></li>
+          <% if current_user %>
+          <li class="nav-link"><a href="/courses/new">Add New course</a></li>
+          <% end %>
+          <% if user_signed_in? %> 
+            <li class="nav-link more">
+              <a class="nav-user-pic" href="/usercourses">
+                <img src="<%= current_user.profile_image %>">
+              </a>
+              <ul class="submenu">
+                <li><a href="/usercourses">Dashboard</a></li>
+                <li><a href="/users/edit">Profile</a></li>
+                <li><a href="/users/sign_out">LOGOUT</a></li>
+              </ul>
+            </li>
+          <% else %> 
+            <a href="/users/sign_in"> Log In </a>
+          <% end %>
         </ul>
       </nav>
-      <div class="navigation-tools">
-        <div class="search-bar">
-          <form role="search">
-            <input type="search" placeholder="Enter Search" />
-            <button type="submit">
-              <img src="https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/search-icon.png" alt="Search Icon">
-            </button>
-          </form>
-        </div>
-        <a href="/users" class="sign-up">Sign Up</a>
-      </div>
+    </article>
     </div>
   </header>
 
-<!-- flash -->
+  <!-- Search -->
+  <div class="search_wrapper">
+    <div class="center">
+      <div class="search_bar">
+        <%= form_tag '/courses', :method => :get do %>
+          <h2 class="search_bar_message"> I want to learn: </h2>
+        <div class="search_bar_field">
+          <%= text_field_tag :search %>
+        </div>
+          <%= submit_tag "Search", :class => 'search_bar_btn' %>
+        <% end %>  
+      </div>
+    </div>
+  </div>
 
+
+<!-- flash -->
 <% flash.each do |name, message| %>
   <div class="flash-<%= name %>">
     <span>
@@ -65,7 +70,12 @@
 <% end %>
 
   <div class="container">
-    <%= yield %>
+    <div class="content">
+      <article class="type-system-sans"> 
+        <%= yield %>
+      </article> 
+
+    </div>
   </div>
 <!-- Footer -->
 
@@ -77,13 +87,4 @@
 
 
 
-               <!--  <div class="navigation-tools">
-                  <% #if current_user %>
-                    <li class="nav-link"><a class="sign_up" href="/users/sign_out"> Sign Out </a></li>
-                  <% #else %>
-                  <li><a href="/users/sign_in">Login </a></li>
-                  <li><a href="/users/sign_up">Sign up </a></li>
-                  <% #end %>
-                </div>
- -->
 

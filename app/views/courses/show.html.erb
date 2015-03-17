@@ -1,29 +1,59 @@
 
+<a href="/chapters/new  "> Add a chapter </a> 
+ 
+
+  <article class="type-system-sans">
   <h1><%= @course.name %></h1>
  
 
   <div class="vertical-tabs-container">
     <div class="vertical-tabs">
       <% @chapters.each do |chapter| %>
-        <a href="javascript:void(0)" class="js-vertical-tab vertical-tab" rel="<%= chapter.id%>">
+        <a href="javascript:void(0)" class="chapter js-vertical-tab vertical-tab" rel="<%='chapter' + chapter.id.to_s %>">
           <%= chapter.name %>          
         </a>
+        <% chapter.lessons.each do |lesson| %>
+          <a href="javascript:void(0)" class="js-vertical-tab vertical-tab" rel="<%= 'lesson' + lesson.id.to_s %>">
+            <%= lesson.name %>    
+          </a>
+        <% end %>
       <% end %>
-      
     </div> 
 
     <div class="vertical-tab-content-container">
       <% @chapters.each do |chapter| %>
-        <a href="" class="js-vertical-tab-accordion-heading vertical-tab-accordion-heading is-active" rel="<%= chapter.id %>">
+        <a href="" class="js-vertical-tab-accordion-heading vertical-tab-accordion-heading is-active" rel="<%= 'chapter' + chapter.id.to_s %>">
         </a>
-        <div id="<%= chapter.id%>" class="js-vertical-tab-content vertical-tab-content">
+        <div id="<%= 'chapter' + chapter.id.to_s %>" class="js-vertical-tab-content vertical-tab-content">
             <p> <%= chapter.description %> </p>
-            <p> <%= @lessons %> </p>
         </div>
+
+        <% chapter.lessons.each do |lesson| %>
+          <a href="" class="js-vertical-tab-accordion-heading vertical-tab-accordion-heading is-active" rel="<%= 'lesson' + lesson.id.to_s %>">
+          </a>
+          <div id="<%= 'lesson' + lesson.id.to_s %>" class="js-vertical-tab-content vertical-tab-content">
+              <p> <%= lesson.description %> </p>
+          </div>
+        <% end %>
+
+
+
+
       <% end %>
-
-
     </div>
+
   </div>
 
+</article>
+
+
+
+
+
  
+
+
+
+
+
+

@@ -50,6 +50,13 @@ $(document).ready(function() {
     $(".js-vertical-tab[rel^='"+accordion_activeTab+"']").addClass("is-active");
   });
 
+  var expanderTrigger = document.getElementById("js-expander-trigger");
+    var expanderContent = document.getElementById("js-expander-content");
+
+    $('#js-expander-trigger').click(function(){
+      $(this).toggleClass("expander-hidden");
+    });
+
 
 
 });

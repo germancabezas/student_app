@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150309175013) do
+ActiveRecord::Schema.define(version: 20150317020643) do
 
   create_table "chapters", force: :cascade do |t|
     t.string   "name",        limit: 255
@@ -19,6 +19,13 @@ ActiveRecord::Schema.define(version: 20150309175013) do
     t.integer  "course_id",   limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "course_tags", force: :cascade do |t|
+    t.integer  "tag_id",     limit: 4
+    t.integer  "course_id",  limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
   end
 
   create_table "courses", force: :cascade do |t|
@@ -34,8 +41,14 @@ ActiveRecord::Schema.define(version: 20150309175013) do
     t.string   "name",        limit: 255
     t.string   "description", limit: 255
     t.integer  "chapter_id",  limit: 4
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "user_courses", force: :cascade do |t|
@@ -58,6 +71,10 @@ ActiveRecord::Schema.define(version: 20150309175013) do
     t.string   "last_sign_in_ip",        limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "name",                   limit: 255
+    t.string   "last_name",              limit: 255
+    t.string   "description",            limit: 255
+    t.string   "profile_image",          limit: 255
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

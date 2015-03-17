@@ -1,0 +1,2 @@
+class CourseTagsController < ApplicationController
+end

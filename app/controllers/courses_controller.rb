@@ -2,6 +2,9 @@ class CoursesController < ApplicationController
 
   def index
     @courses = Course.all
+    if params[:search]
+      @courses = @courses.where('Name LIKE ?', "%" + params[:search] + "%")
+    end
     
   end
 
@@ -9,9 +12,6 @@ class CoursesController < ApplicationController
     @course = Course.find(params[:id])
     @chapters = @course.chapters
 
-    @chapters.each do |chapter|
-      @lessons = chapter.lessons
-    end
 
   end
 

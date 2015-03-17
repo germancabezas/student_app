@@ -1,0 +1,42 @@
+
+<br>
+<br>
+<article class="type-system-sans"> 
+  <div class="center">
+    <h2> What do you want to learn? </h2>
+    <div class="search_bar">
+      <%= form_tag '/searches', :method => :get do %>
+        <div class="search-field">
+          <%= text_field_tag :tag %>
+        </div>
+          <%= submit_tag "Search", :class => 'search-btn' %>
+      <% end %> 
+    </div> 
+  <!-- Tags Searched -->
+    <div class="keywords">
+      <% if params[:tag].present? %>
+      <h2><%= @tag.name %><h2>
+      <% else %>
+      <h2> Add keywords </h2>
+      <% end %>
+    </div>
+  <!-- Tags Searched -->
+  <br/>
+  <br/>
+  <br/>
+      <% @courses.each do |course| %>
+      <div class="expander course-searches">
+        <a href="javascript:void(0)" id="js-expander-trigger" class="expander-trigger expander-hidden"><%= course.name %></a>
+        <div id="js-expander-content" class="expander-content">
+          <p><%= course.description %></p>
+        </div>
+      </div>
+      <% end %>
+  </div>
+</div>
+
+
+
+
+
+

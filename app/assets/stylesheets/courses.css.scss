@@ -1,4 +1,14 @@
+
 /* GENERALL STYLES*/
+
+body {background-image: url(http://s15.postimg.org/nrbpk2oyj/squairy_light.png); 
+  margin: 0;
+}
+button, input[type="button"], input[type="reset"], input[type="submit"], button {
+  background-color: #0044e6 ;
+  border-radius: 0;
+  padding: 10px 25px;
+}
 
 /* Break points */
 $desktop: new-breakpoint(max-width 1400px 4);
@@ -6,12 +16,18 @@ $laptop: new-breakpoint(max-width 900px 4);
 $tablet: new-breakpoint(max-width 700px 4);
 $mobile: new-breakpoint(max-width 480px 4);
 
+/* Navigation */
+a .logo {
+  height: 45px;
+  width: auto;
+  padding-top: 10px;
+}
+header.navigation ul li.nav-link a {color: white;}
 
-
-
+/* Blocks - Layout */
 
 .container{
-  @include outer-container(90%);
+  @include outer-container(100%);
   padding-top: 20px;
 }
 .left_block {
@@ -30,9 +46,91 @@ $mobile: new-breakpoint(max-width 480px 4);
   }
 }
 
+.center {
+   @include outer-container(60%);
+   @include media($laptop) {
+    @include outer-container(80%);
+   }
+ }
+
+ .content, .course-searches, .keywords {
+  clear: both;
+ }
+ .course-searches {width: 100%;}
+
+
+ /* Main - Search*/
+ 
+.search_wrapper { 
+  background: #b0b1b6;
+  @include span-columns(12);
+
+
+}
+.search_bar { 
+  padding: 10px;
+}
+ .search_bar_message {
+    @include span-columns(4);
+    color: white;
+    text-align: center;
+    line-height: 38px;
+    vertical-align: middle;
+ }
+ .search_bar_field {
+    @include span-columns(4); 
+ }
+
+ /* Search - Default */
+
+ .search-field {
+  @include span-columns(9);
+  color: $dark-gray;
+ }
+ .search-btn{
+  @include span-columns(3); 
+ }
+ .tags {
+  clear: both;
+ }
+
+
+
+
+
+/* User Section*/
+
+.nav-user-pic  { 
+  line-height: 0;
+ img { 
+    width: 40px; 
+    height: 40px;
+    background-size: contain; 
+    margin-bottom: -15px;
+  }
+}
+
+
+/* Logs */
+.log { 
+  @include outer-container(70%);
+  padding: 70px;
+  background: $light-gray;
+  margin-top: 50px;
+}
+
+
 
 button { 
   @include button(pill);
 }
 
 
+.chapter {
+  text-transform: uppercase;
+}
+
+
+.lesson {
+  
+}
