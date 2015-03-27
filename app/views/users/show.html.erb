@@ -1,6 +1,22 @@
 <div class="center">
   <br>
-  <h2><%= @user.name %></h2>
+  <br>
+  <br>
+  <div class="left_block">
+    <div class="profile-image">
+      <img src=<%= current_user.profile_image %> >
+      <%= form_for @user do |f| %>
+        <%= f.file_field :profile_image %>
+        <%= f.submit %>
+      <% end %>
+    </div>
+  </div>
+  <div class="right_block">
+    <h2> About <%= current_user.name %> <%= current_user.last_name %> </h2>
+    <p><%= current_user.description %></p>
+    <h2> Email </h2>
+    <h2><%= current_user.email %></h2>
+  </div>
 </div>
 
 

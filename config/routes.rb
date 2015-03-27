@@ -3,13 +3,16 @@ Rails.application.routes.draw do
   devise_for :users
   resources :courses
   get '/' => 'home_pages#index', :as => :home_pages
+  get '/home_pages/about' => 'home_pages#about'
+
   resources :usercourses
   resources :chapters
 
   get '/searches' => 'searches#index'
 
 
-  get 'users/:id' => 'users#show'
+  get 'users/:id' => 'users#show', :as => 'user'
+  patch 'users/:id' => 'users#update'
 
 
 

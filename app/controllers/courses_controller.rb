@@ -12,6 +12,9 @@ class CoursesController < ApplicationController
     
   end
 
+
+
+
   def show
     @course = Course.find(params[:id])
     @chapters = @course.chapters
@@ -24,18 +27,6 @@ class CoursesController < ApplicationController
     p "++++++++++++++++++++++++"
      p @user_students
 
-     
-
-
-    # @user_student = User.joins(:courses => :user_courses).where(:user_courses => {:user_id => 1, :user_type => "student"}).first
-
-    # @user_teacher = User.joins(:courses => :user_courses).where(:user_courses => {:user_id => 1, :user_type => "teacher"}).first
-
-
-
-
-   
-
   
   end
 
@@ -45,9 +36,9 @@ class CoursesController < ApplicationController
   end
 
   def create
-    Course.create(:name => params[:name])
-    flash[:success] = "Product has been added"
-    redirect_to '/courses' 
+    @new_course = Course.create(:name => params[:name])
+    flash[:success] = "Your new course has been added"
+    redirect_to "/courses/#{@new_course.id}"
 
 
     # @course = Course.new(blah => blah)

@@ -1,10 +1,13 @@
+<div class="container-homepage">
+  <img src="<%= asset_path 'home-bg.jpg'%>">
+</div>
 <header class="navigation navigation-homepage" role="banner">
   <div class="navigation-wrapper">
     <article class="type-system-sans"> 
     <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">MENU</a>
     <nav role="navigation">
       <ul id="js-navigation-menu" class="navigation-menu show">
-        <li class="nav-link"><a href="#">About</a></li>
+        <li class="nav-link"><a href="/home_pages/about">About</a></li>
         <li class="nav-link"><a href="/courses">Courses</a></li>
         <li class="nav-link"><a href="/searches">Keyword Search</a></li>
         <% if current_user %>
@@ -13,7 +16,7 @@
         <% if user_signed_in? %> 
           <li class="nav-link more">
             <a class="nav-user-pic" href="/usercourses">
-              <img src="<%= current_user.profile_image %>">
+              <img src=<%= current_user.profile_image %> >
             </a>
             <ul class="submenu">
               <li><a href="/usercourses">Dashboard</a></li>

@@ -4,4 +4,9 @@ class HomePagesController < ApplicationController
     
     
   end
+
+  def about
+    
+    
+  end
 end
