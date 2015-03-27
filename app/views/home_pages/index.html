@@ -1,0 +1,50 @@
+<header class="navigation navigation-homepage" role="banner">
+  <div class="navigation-wrapper">
+    <article class="type-system-sans"> 
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">MENU</a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+        <li class="nav-link"><a href="#">About</a></li>
+        <li class="nav-link"><a href="/courses">Courses</a></li>
+        <li class="nav-link"><a href="/searches">Keyword Search</a></li>
+        <% if current_user %>
+        <li class="nav-link"><a href="/courses/new">Add New course</a></li>
+        <% end %>
+        <% if user_signed_in? %> 
+          <li class="nav-link more">
+            <a class="nav-user-pic" href="/usercourses">
+              <img src="<%= current_user.profile_image %>">
+            </a>
+            <ul class="submenu">
+              <li><a href="/usercourses">Dashboard</a></li>
+              <li><a href="/users/edit">Profile</a></li>
+              <li><a href="/users/sign_out">LOGOUT</a></li>
+            </ul>
+          </li>
+        <% else %> 
+          <a href="/users/sign_in"> Log In </a>
+        <% end %>
+      </ul>
+    </nav>
+  </article>
+  </div>
+</header>
+
+<div class="center logo-quotes">
+  <img src="<%= image_path('logo-negative.png') %>">
+  <h2> “The function of education is to teach one to think intensively and to think critically. Intelligence plus character - that is the goal of true education.” <h2>
+</div>
+
+
+<div class="search-home-page">
+  <div class="center">
+    <div class="search_bar search_bar-homepage">
+      <%= form_tag '/searches', :method => :get do %>
+        <div class="search-field">
+          <%= text_field_tag :tag %>
+        </div>
+          <%= submit_tag "Search", :class => 'search-btn' %>
+      <% end %> 
+    </div> 
+  </div >
+</div>

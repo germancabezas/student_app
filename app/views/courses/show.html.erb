@@ -1,11 +1,7 @@
-
-<a href="/chapters/new  "> Add a chapter </a> 
- 
-
-  <article class="type-system-sans">
-  <h1><%= @course.name %></h1>
- 
-
+<div class="header-page">
+<h2><%= @course.name %></h2>
+</div>
+  <article class="type-system-sans course-content"> 
   <div class="vertical-tabs-container">
     <div class="vertical-tabs">
       <% @chapters.each do |chapter| %>
@@ -20,11 +16,12 @@
       <% end %>
     </div> 
 
-    <div class="vertical-tab-content-container">
+    <div class="vertical-tab-content-container course-tab-content-container">
       <% @chapters.each do |chapter| %>
         <a href="" class="js-vertical-tab-accordion-heading vertical-tab-accordion-heading is-active" rel="<%= 'chapter' + chapter.id.to_s %>">
         </a>
-        <div id="<%= 'chapter' + chapter.id.to_s %>" class="js-vertical-tab-content vertical-tab-content">
+        <div id="<%= 'chapter' + chapter.id.to_s %>" class="js-vertical-tab-content vertical-tab-content course-tab-content">
+            <h1> <%= chapter.name %> </h1>
             <p> <%= chapter.description %> </p>
         </div>
 
@@ -34,17 +31,41 @@
           <div id="<%= 'lesson' + lesson.id.to_s %>" class="js-vertical-tab-content vertical-tab-content">
               <p> <%= lesson.description %> </p>
           </div>
-        <% end %>
+         <% end %>
+       <% end %>
+     </div>
+   </div>
+  </article>
 
 
 
+<% if @user_teacher %>
 
-      <% end %>
+    <div class="course-toolbar">
+      <div class="course-toolbar-item header-drag">
+        <img src="<%= asset_path 'header.png'%>">
+      </div>
+      <div class="course-toolbar-item text-drag">
+        <img src="<%= asset_path 'text-field.png'%>">
+      </div>
+      <div class="course-toolbar-item image-drag">
+        <img src="<%= asset_path 'image.png'%>">
+      </div>
+      <div class="course-toolbar-item video-drag">
+        <img src="<%= asset_path 'video.png'%>">
+      </div>
+      <div class="course-toolbar-item file-drag">
+        <img src="<%= asset_path 'file.png'%>">
+      </div>
+      <div class="course-toolbar-item sound-drag">
+        <img src="<%= asset_path 'sound.png'%>">
+      </div>
+      </div>
     </div>
 
-  </div>
+<% end %>
 
-</article>
+
 
 
 

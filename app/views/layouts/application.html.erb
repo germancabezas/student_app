@@ -9,11 +9,12 @@
 <body>
 
   <!-- Navigation -->
+
   <header class="navigation" role="banner">
     <div class="navigation-wrapper">
       <article class="type-system-sans"> 
       <a href="/">
-        <img class="logo" src="http://s24.postimg.org/b3ezsi66t/logo.png">
+        <img class="logo" src="http://s14.postimg.org/kciqmygi9/logo_opencourse.png">
       </a>
       <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">MENU</a>
       <nav role="navigation">
@@ -31,7 +32,7 @@
               </a>
               <ul class="submenu">
                 <li><a href="/usercourses">Dashboard</a></li>
-                <li><a href="/users/edit">Profile</a></li>
+                <li><a href="/users/<%= current_user.id %>">Profile</a></li>
                 <li><a href="/users/sign_out">LOGOUT</a></li>
               </ul>
             </li>

@@ -1,7 +1,20 @@
 
 
 
+
+
 <div class="center">
+  <div class="alphabet_search">
+    <ul>
+      <% @alphabet.each do |letter|%>
+      <li >
+        <%= link_to "#{letter}", courses_path(:letter => letter), :class => "alphabet-link" %>
+      </li>
+      <% end %>
+      </ul>
+  </div>
+
+  <% if @courses %>
     <div class="grid-items-lines">
       <% @courses.each do |course| %>
         <a href="/courses/<%= course.id %>" class="grid-item">
@@ -13,6 +26,7 @@
       <div class="right-cover"></div>
       <div class="bottom-cover"></div>
     </div>
+  <% end %>
 </div>
 
 
@@ -20,6 +34,7 @@
 
 
 
-      
+
+
 
 

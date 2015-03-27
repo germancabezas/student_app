@@ -2,11 +2,15 @@ Rails.application.routes.draw do
 
   devise_for :users
   resources :courses
-  get '/' => 'courses#index'
+  get '/' => 'home_pages#index', :as => :home_pages
   resources :usercourses
   resources :chapters
 
   get '/searches' => 'searches#index'
+
+
+  get 'users/:id' => 'users#show'
+
 
 
   # get '/' => 'home_page#index'

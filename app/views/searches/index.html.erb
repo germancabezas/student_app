@@ -3,27 +3,41 @@
 <br>
 <article class="type-system-sans"> 
   <div class="center">
-    <h2> What do you want to learn? </h2>
-    <div class="search_bar">
+    <h2 class="tcenter"> What do you want to learn? </h2>
+    <div class="search_bar keyword_search">
       <%= form_tag '/searches', :method => :get do %>
         <div class="search-field">
           <%= text_field_tag :tag %>
         </div>
           <%= submit_tag "Search", :class => 'search-btn' %>
+          <label class="label-switch search-checkbox">
+            <input type="checkbox" />
+            <div class="checkbox"></div>
+
+          </label>
       <% end %> 
     </div> 
   <!-- Tags Searched -->
     <div class="keywords">
-      <% if params[:tag].present? %>
-      <h2><%= @tag.name %><h2>
+      <h3> Your search: </h3>
+      <hr>
+      <% if @tag %>
+        <h2><%= @tag.name %><h2>
+      <% elsif %>
+        <h2>
+          <% @keywords.each do |keyword| %>
+          <%= keyword %>
+          <% end %>
+        </h2>
       <% else %>
-      <h2> Add keywords </h2>
+        <h2> Add keywords </h2>
       <% end %>
     </div>
   <!-- Tags Searched -->
   <br/>
   <br/>
   <br/>
+    <% if @tag %>
       <% @courses.each do |course| %>
       <div class="expander course-searches">
         <a href="javascript:void(0)" id="js-expander-trigger" class="expander-trigger expander-hidden"><%= course.name %></a>
@@ -32,8 +46,11 @@
         </div>
       </div>
       <% end %>
+    <% end %>
   </div>
 </div>
+</article>
+
 
 
 

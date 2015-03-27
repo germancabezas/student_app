@@ -1,28 +1,103 @@
-
-/* GENERALL STYLES*/
-
-body {background-image: url(http://s15.postimg.org/nrbpk2oyj/squairy_light.png); 
-  margin: 0;
-}
-button, input[type="button"], input[type="reset"], input[type="submit"], button {
-  background-color: #0044e6 ;
-  border-radius: 0;
-  padding: 10px 25px;
-}
-
 /* Break points */
 $desktop: new-breakpoint(max-width 1400px 4);
 $laptop: new-breakpoint(max-width 900px 4);
 $tablet: new-breakpoint(max-width 700px 4);
 $mobile: new-breakpoint(max-width 480px 4);
 
-/* Navigation */
-a .logo {
-  height: 45px;
-  width: auto;
-  padding-top: 10px;
+
+/* Custom Colors*/
+
+
+$orange: #ed6737;
+
+
+
+/* Custom Shapes*/
+@mixin border-radius($radius) {
+@include border-top-radius($radius);
+@include border-right-radius($radius);
+@include border-bottom-radius($radius);
+@include border-left-radius($radius);
 }
-header.navigation ul li.nav-link a {color: white;}
+
+
+
+
+/* GENERALL STYLES*/
+
+html, body {; 
+  margin: 0;
+  height: 100%
+}
+
+button, input[type="button"], input[type="reset"], input[type="submit"], button {
+  @include linear-gradient(#ff7d47, #ed6737);   
+  padding: 10px 25px;
+}
+.tcenter {text-align: center;}
+article.type-system-sans hr {width: 100%;}
+.label-switch input[type="checkbox"]:checked + .checkbox { background: $dark-gray;}
+
+/* Navigation */
+header.navigation .logo {
+  height: 80px;
+  width: auto;
+  padding: 5px;
+}
+header.navigation ul li.nav-link a {}
+.header-page { 
+  background-color: $light-gray;
+  text-align: center;
+  padding: 10px;
+}
+article.type-system-sans .header-page h2 { margin: 0;}
+
+/*  HOME PAGE */
+
+.container-homepage {
+  position: fixed; 
+  top: -50%; 
+  left: -50%; 
+  width: 200%; 
+  height: 200%;
+  z-index: -100;
+  @include media($mobile) {
+    width: 300%;
+    background: red;
+  }
+  img {
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    right: 0; 
+    bottom: 0; 
+    margin: auto; 
+    min-width: 50%;
+    min-height: 50%;
+  }
+}
+
+.search_bar-homepage {
+  margin-top: 5%;
+}
+header.navigation.navigation-homepage {
+  background: none;
+  border-bottom: 1px solid #2D2D2D;
+  ul li.nav-link a {
+    color: white;
+  }
+}
+
+
+.logo-quotes {
+  text-align: center;
+  h1,h2,h3 {
+    color: white;
+  }
+  margin-top: 10%;
+}
+
+
 
 /* Blocks - Layout */
 
@@ -62,7 +137,7 @@ header.navigation ul li.nav-link a {color: white;}
  /* Main - Search*/
  
 .search_wrapper { 
-  background: #b0b1b6;
+  background: $dark-gray;
   @include span-columns(12);
 
 
@@ -70,7 +145,16 @@ header.navigation ul li.nav-link a {color: white;}
 .search_bar { 
   padding: 10px;
 }
- .search_bar_message {
+.keyword_search {
+  min-height: 58px;
+  background: $light-gray;
+  @include border-top-radius(10px);
+  @include border-right-radius(10px);
+  @include border-bottom-radius(10px);
+  @include border-left-radius(10px);
+  margin-bottom: 20px;
+}
+.search_bar_message {
     @include span-columns(4);
     color: white;
     text-align: center;
@@ -84,11 +168,18 @@ header.navigation ul li.nav-link a {color: white;}
  /* Search - Default */
 
  .search-field {
-  @include span-columns(9);
+  @include span-columns(5);
+  @include shift(2);
   color: $dark-gray;
  }
  .search-btn{
   @include span-columns(3); 
+ }
+ .search-checkbox {
+  @include span-columns(2);
+    :hover{
+      background:red;
+    };
  }
  .tags {
   clear: both;
@@ -134,3 +225,79 @@ button {
 .lesson {
   
 }
+
+
+/* Course Page */
+.course-content {
+  @include span-columns(11);
+}
+.course-toolbar {
+  background-color: #e6e7e8;
+  min-height: 600px;
+  @include span-columns(1);
+}
+.course-toolbar {
+  text-align: center;
+  position: fixed;
+  right: 0;
+  height: 100%;
+  .course-toolbar-item{
+    margin-top: 10%;
+    img { 
+      width: 50%;
+      height: auto;
+      @include media($laptop) {
+        width: 80%;
+      }
+    }
+  }
+}
+.vertical-tabs-container .vertical-tab-content-container.course-tab-content-container {
+  background-color: #ffffff;
+  min-height: 600px;
+}
+.vertical-tabs-container .vertical-tab-content.course-tab-content {
+  background-color: #ffffff;
+}
+
+.vertical-tabs-container {
+  border: none;
+}
+
+
+.alphabet_search {
+  padding: 30px 30px 50px; 
+  &:after{
+    content: "";
+    display: block;
+    clear: both;
+  };
+  ul {
+    text-align: center;
+    li {
+      width: 50px;
+      height: 50px;
+      display: inline-block;
+      margin: 5px;
+      a.alphabet-link { 
+        color: $orange;
+        padding: 12px;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        display: block;
+        &:hover {
+          background-color: $orange ;
+          color: white;
+          @include border-radius(50%);
+        };
+      }
+    }
+  }
+}
+
+
+
+
+
+

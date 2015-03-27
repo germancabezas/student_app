@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>StudentApp</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+  <div class="container-homepage">
+    <img src="<%= asset_path 'home-bg.jpg'%>">
+  </div>
+
+  <div class="content">
+    <article class="type-system-sans"> 
+      <%= yield %>
+    </article> 
+  </div>
+</body>
+</html>
