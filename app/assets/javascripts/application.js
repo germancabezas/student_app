@@ -13,5 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require angular
+//= require angular_sanitize
+//= require xeditable
 //= require app
 //= require_tree .

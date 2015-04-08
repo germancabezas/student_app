@@ -6,15 +6,22 @@ Rails.application.routes.draw do
   get '/home_pages/about' => 'home_pages#about'
 
   resources :usercourses
+  resources :teachercourses
+  resources :studentcourses
   resources :chapters
-
+  resources :lessons
   get '/searches' => 'searches#index'
 
 
   get 'users/:id' => 'users#show', :as => 'user'
   patch 'users/:id' => 'users#update'
 
+  # API 
+  get 'lesson_elements/:id' => 'lesson_elements#show'
+  get 'chapter_elements/:id' => 'chapter_elements#show'
 
+
+# BELOW CODE IS JUST REFERENCE
 
   # get '/' => 'home_page#index'
   #    get '/products' => 'products#index'

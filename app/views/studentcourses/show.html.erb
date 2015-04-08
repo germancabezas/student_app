@@ -1,0 +1,33 @@
+<div ng-controller="lessonCtrl">
+  <% @studentcourse_array.each do | course | %>
+    <div class="header-page">
+    <h2><%= course.name %></h2>
+    </div>
+      <article class="type-system-sans course-content"> 
+        <div class="vertical-tabs-container">
+          <div class="vertical-tabs">
+            <% course.chapters.each do |chapter| %>
+              <a ng-click="fetchChapter(<%=chapter.id%>)" href="javascript:void(0)" class="chapter js-vertical-tab vertical-tab" rel="<%='chapter' + chapter.id.to_s %>"><%= chapter.name %></a>
+                <% chapter.lessons.each do |lesson| %>
+                  <a ng-click="fetchLesson(<%=lesson.id%>)" href="javascript:void(0)" class="js-vertical-tab vertical-tab" rel="<%='lesson' + lesson.id.to_s %>"><%= lesson.name %></a>
+                <% end %>
+            <% end %>
+          </div>
+          <div class="vertical-tab-content-container course-tab-content-container">
+            <div ng-bind-html="htmlElement">
+              
+            </div>
+          </div>
+        </div>
+     </article>
+  <% end %>
+</div>
+
+
+
+
+
+
+
+
+ 

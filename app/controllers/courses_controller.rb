@@ -18,14 +18,13 @@ class CoursesController < ApplicationController
   def show
     @course = Course.find(params[:id])
     @chapters = @course.chapters
-    @user_courses = current_user.courses
+    if current_user
+      @user_courses = current_user.courses
+      @user_student = User.joins(:courses).where(:user_courses => {:user_id => current_user.id, :user_type => "student"})[0]
 
-    @user_student = User.joins(:courses).where(:user_courses => {:user_id => current_user.id, :user_type => "student"})[0]
+      @user_teacher = User.joins(:courses).where(:user_courses => {:user_id => current_user.id, :user_type => "teacher"})[0]
+    end
 
-    @user_teacher = User.joins(:courses).where(:user_courses => {:user_id => current_user.id, :user_type => "teacher"})[0]
-
-    p "++++++++++++++++++++++++"
-     p @user_students
 
   
   end
@@ -38,7 +37,7 @@ class CoursesController < ApplicationController
   def create
     @new_course = Course.create(:name => params[:name])
     flash[:success] = "Your new course has been added"
-    redirect_to "/courses/#{@new_course.id}"
+    redirect_to "/teachercourses/#{@new_course.id}"
 
 
     # @course = Course.new(blah => blah)

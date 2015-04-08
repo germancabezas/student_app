@@ -2,7 +2,7 @@
   <div class="navigation-wrapper">
     <article class="type-system-sans"> 
     <a href="/">
-      <img class="logo" src="http://s14.postimg.org/kciqmygi9/logo_opencourse.png">
+      <img class="logo" src="<%= asset_path 'logo_opencourse.png'%>">
     </a>
     <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">MENU</a>
     <nav role="navigation">
@@ -10,9 +10,7 @@
         <li class="nav-link"><a href="/home_pages/about">About</a></li>
         <li class="nav-link"><a href="/courses">Courses</a></li>
         <li class="nav-link"><a href="/searches">Keyword Search</a></li>
-        <% if current_user %>
-        <li class="nav-link"><a href="/courses/new">Add New course</a></li>
-        <% end %>
+        <li class="nav-link"><a href="/courses/new">Create course</a></li>
         <% if user_signed_in? %> 
           <li class="nav-link more">
             <a class="nav-user-pic" href="/usercourses">
@@ -26,7 +24,8 @@
             </ul>
           </li>
         <% else %> 
-          <a href="/users/sign_in"> Log In </a>
+          <a class="button-simple" href="/users/sign_in"> Log In </a>
+          <a class="button" href="/users/sign_up"> Sign Up </a>
         <% end %>
       </ul>
     </nav>
@@ -48,6 +47,12 @@
     </div>
   </div>
 </div>
+
+
+
+
+
+
 
 <div class="container">
   <div id="js-parallax-window" class="parallax-window">

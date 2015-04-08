@@ -29,9 +29,23 @@ html, body {;
   margin: 0;
   height: 100%
 }
-
+.button-simple { 
+  color: $dark-gray!important; 
+  padding: 5px 20px ;
+  text-transform: uppercase;
+}
+.button-simple-reversed { 
+  color: white!important; 
+  padding: 5px 20px ;
+  text-transform: uppercase;
+}
 button, input[type="button"], input[type="reset"], input[type="submit"], button {
-  @include linear-gradient(#ff7d47, #ed6737);   
+  @include linear-gradient(#ff7d47, #ed6737);  
+  padding: 10px 25px;
+}
+.button {
+  @include linear-gradient(#ff7d47, #ed6737);  
+  color: white!important; 
   padding: 10px 25px;
 }
 .tcenter {text-align: center;}
@@ -211,13 +225,18 @@ header.navigation.navigation-homepage {
 
 
 /* Logs */
-.log { 
+.userlog { 
   @include outer-container(70%);
   padding: 70px;
   background: $light-gray;
   margin-top: 50px;
 }
 
+.signup {
+  background-color: #a59191;
+  min-height: 900px;
+  padding-top: 20px;  
+}
 
 
 button { 
@@ -271,8 +290,7 @@ button {
 .vertical-tabs-container {
   border: none;
 }
-
-
+.vertical-tabs-container .vertical-tab-content-container { background-color: white;}
 .alphabet_search {
   padding: 30px 30px 50px; 
   &:after{
@@ -302,6 +320,13 @@ button {
       }
     }
   }
+}
+
+.add-lesson-btn, .add-chapter-btn { 
+  display: block;
+  background: $light-gray; 
+  color: #999!important; 
+  margin-bottom: 1px;
 }
 
 

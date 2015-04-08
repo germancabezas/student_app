@@ -1,0 +1,2 @@
+module TeachercoursesHelper
+end

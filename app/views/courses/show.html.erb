@@ -14,8 +14,7 @@
           </a>
         <% end %>
       <% end %>
-    </div> 
-
+    </div>
     <div class="vertical-tab-content-container course-tab-content-container">
       <% @chapters.each do |chapter| %>
         <a href="" class="js-vertical-tab-accordion-heading vertical-tab-accordion-heading is-active" rel="<%= 'chapter' + chapter.id.to_s %>">
@@ -24,9 +23,8 @@
             <h1> <%= chapter.name %> </h1>
             <p> <%= chapter.description %> </p>
         </div>
-
         <% chapter.lessons.each do |lesson| %>
-          <a href="" class="js-vertical-tab-accordion-heading vertical-tab-accordion-heading is-active" rel="<%= 'lesson' + lesson.id.to_s %>">
+          <a href="" class="js-vertical-tab-accordion-heading vertical-tab-accordion-heading" rel="<%= 'lesson' + lesson.id.to_s %>">
           </a>
           <div id="<%= 'lesson' + lesson.id.to_s %>" class="js-vertical-tab-content vertical-tab-content">
               <p> <%= lesson.description %> </p>
@@ -37,33 +35,6 @@
    </div>
   </article>
 
-
-
-<% if @user_teacher %>
-
-    <div class="course-toolbar">
-      <div class="course-toolbar-item header-drag">
-        <img src="<%= asset_path 'header.png'%>">
-      </div>
-      <div class="course-toolbar-item text-drag">
-        <img src="<%= asset_path 'text-field.png'%>">
-      </div>
-      <div class="course-toolbar-item image-drag">
-        <img src="<%= asset_path 'image.png'%>">
-      </div>
-      <div class="course-toolbar-item video-drag">
-        <img src="<%= asset_path 'video.png'%>">
-      </div>
-      <div class="course-toolbar-item file-drag">
-        <img src="<%= asset_path 'file.png'%>">
-      </div>
-      <div class="course-toolbar-item sound-drag">
-        <img src="<%= asset_path 'sound.png'%>">
-      </div>
-      </div>
-    </div>
-
-<% end %>
 
 
 

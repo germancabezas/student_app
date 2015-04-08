@@ -10,9 +10,7 @@
         <li class="nav-link"><a href="/home_pages/about">About</a></li>
         <li class="nav-link"><a href="/courses">Courses</a></li>
         <li class="nav-link"><a href="/searches">Keyword Search</a></li>
-        <% if current_user %>
-        <li class="nav-link"><a href="/courses/new">Add New course</a></li>
-        <% end %>
+        <li class="nav-link"><a href="/courses/new">Create course</a></li>
         <% if user_signed_in? %> 
           <li class="nav-link more">
             <a class="nav-user-pic" href="/usercourses">
@@ -25,20 +23,18 @@
             </ul>
           </li>
         <% else %> 
-          <a href="/users/sign_in"> Log In </a>
+          <a class="button-simple-reversed" href="/users/sign_in"> Log In </a>
+          <a class="button" href="/users/sign_up"> Sign Up </a>
         <% end %>
       </ul>
     </nav>
   </article>
   </div>
 </header>
-
 <div class="center logo-quotes">
   <img src="<%= image_path('logo-negative.png') %>">
   <h2> “The function of education is to teach one to think intensively and to think critically. Intelligence plus character - that is the goal of true education.” <h2>
 </div>
-
-
 <div class="search-home-page">
   <div class="center">
     <div class="search_bar search_bar-homepage">
