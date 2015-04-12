@@ -1,52 +1,86 @@
 <div ng-controller="lessonCtrl">
   <% @teachercourse_array.each do | course | %>
   <div class="header-page">
+    <a class="button add-chapter-btn" href="/chapters/new">  
+      Add Chapter + </a>
     <h2><%= course.name %></h2>
+
+      <%= form_tag("/courses/#{course.id}/publish", method: "patch") do %>
+        <%= hidden_field_tag :course_id, "#{course.id.to_i}" %>
+        <%= submit_tag("Publish") %>
+      <% end %>
   </div>
-    <article class="type-system-sans course-content"> 
+    <article class="type-system-sans"> 
       <div class="vertical-tabs-container">
         <div class="vertical-tabs">
           <% course.chapters.each do |chapter| %>
-            <a ng-click="fetchChapter(<%=chapter.id%>)" href="javascript:void(0)" class="chapter js-vertical-tab vertical-tab" rel="<%='chapter' + chapter.id.to_s %>"><%= chapter.name %></a>
+            <a class="add-lesson" href="/lesson/new">+</a>
+            <a ng-click="fetchChapter(<%=chapter.id%>)" href="javascript:void(0)" class="chapter-tab js-vertical-tab vertical-tab" rel="<%='chapter' + chapter.id.to_s %>"><%= chapter.name %> </a> 
               <% chapter.lessons.each do |lesson| %>
-                <a ng-click="fetchLesson(<%=lesson.id%>)" href="javascript:void(0)" class="js-vertical-tab vertical-tab" rel="<%='lesson' + lesson.id.to_s %>"><%= lesson.name %></a>
+                <a ng-click="fetchLesson(<%=lesson.id%>)" href="javascript:void(0)" class="js-vertical-tab vertical-tab lesson-tab" rel="<%='lesson' + lesson.id.to_s %>"><%= lesson.name %> </a>
               <% end %>
-          <% end %>
-            <a class="button add-chapter-btn" href="/chapters/new">  Chapter + </a>
-            <a class="button add-lesson-btn" href="/lesson/new"> Lesson + </a>
+          <% end %>   
         </div>
-        <div class="vertical-tab-content-container course-tab-content-container">
-          <div ng-bind-html="htmlElement">
-            
-          </div>
+        <div class="vertical-tab-content-container course-tab-content-container course-content">
+            <div ng-repeat="lessonElement in lessonElements track by $index | orderBy:lessonElement.element_priority:true">
+              <div ng-if="lessonElement.element_type === 'text'">
+                <p editable-textarea="lessonElement.element_text" onbeforesave="updateElement($data)">{{ lessonElement.element_text }}</p>
+              </div>
+              <div ng-if="lessonElement.element_type === 'title'">
+                <h2 editable-textarea="lessonElement.element_text">{{ lessonElement.element_text }}</h2>
+              </div>
+              <div ng-if="lessonElement.element_type === 'image'">
+                <img src="{{ lessonElement.element_url }}" width="300" height="auto">
+              </div>
+              <div ng-if="lessonElement.element_type === 'video'">
+                <div editable-textarea="lessonElement.element_text" ng-bind-html="makeTrust(lessonElement.element_text)">
+                </div>
+              </div>
+            </div>
+            <!-- Hidden - triggered elements -->
+            <div id="text-form" ng-if="textFormVisible">
+              <textarea ng-model="newText" placeholder="Enter Your Content Here"> </textarea>
+              <button ng-click="saveText(newText)" class="button">Save</button>
+            </div>
+            <div id="title-form" ng-if="titleFormVisible">
+              <textarea ng-model="newTitle" placeholder="Enter Your Title Here"> </textarea>
+              <button ng-click="saveTitle(newTitle)" class="button">Save</button>
+            </div>
+            <div id="video-field" ng-if="videoFieldVisible">
+              <textarea ng-model="newVideo" placeholder="Copy your embeded code here"> </textarea>
+              <button ng-click="saveVideo(newVideo)" class="button">Save</button>
+            </div>
+            <!-- Uploader -->
 
-          <a href="#" editable-text="user.name">{{ course.name || "empty" }}</a>
+                <div id="video-field" ng-if="imageUploaderVisible" >
+                  <div ng-init="uploadImage()">
+                    <input type="file" nv-file-select="" uploader="uploader" multiple /><br/>
+                    <ul>
+                        <li ng-repeat="item in uploader.queue">
+                            Name: <span ng-bind="item.file.name"></span><br/>
+                            <div ng-show="uploader.isHTML5" ng-thumb="{ file: item._file, height: 100 }"></div>
+                        </li>
+                    </ul>
+                    <button type="button" class="btn btn-success btn-s" ng-click="uploader.uploadAll()" ng-disabled="!uploader.getNotUploadedItems().length">
+                        <span class="glyphicon glyphicon-upload"></span> Upload all
+                    </button>
+                    <div class="progress" style="">
+                        <div class="progress-bar" role="progressbar" ng-style="{ 'width': uploader.progress + '%' }"></div>
+                    </div>
+                  </div>
+                </div>
 
+            <!-- End Uploader -->
         </div>
       </div>
-   </article>
-      <div class="course-toolbar">
-        <br>
-        <div class="course-toolbar-item header-drag">
-          <img src="<%= asset_path 'header.png'%>">
-        </div>
-        <div class="course-toolbar-item text-drag">
-          <img src="<%= asset_path 'text-field.png'%>">
-        </div>
-        <div class="course-toolbar-item image-drag">
-          <img src="<%= asset_path 'image.png'%>">
-        </div>
-        <div class="course-toolbar-item video-drag">
-          <img src="<%= asset_path 'video.png'%>">
-        </div>
-        <div class="course-toolbar-item file-drag">
-          <img src="<%= asset_path 'file.png'%>">
-        </div>
-        <div class="course-toolbar-item sound-drag">
-          <img src="<%= asset_path 'sound.png'%>">
-        </div>
-      </div>
+  <!-- TOOL BAR -->
+  </article>
   <% end %>
+    <%=render "partials/toolbar"%>
+
 </div>
 
    
+
+
+

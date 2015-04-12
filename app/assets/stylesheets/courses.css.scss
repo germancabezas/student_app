@@ -47,10 +47,21 @@ button, input[type="button"], input[type="reset"], input[type="submit"], button 
   @include linear-gradient(#ff7d47, #ed6737);  
   color: white!important; 
   padding: 10px 25px;
+  text-shadow: none;
+  box-shadow: none;
+  border: none;
+  @include border-top-radius(10px);
+  @include border-right-radius(10px);
+  @include border-bottom-radius(10px);
+  @include border-left-radius(10px);
 }
 .tcenter {text-align: center;}
 article.type-system-sans hr {width: 100%;}
 .label-switch input[type="checkbox"]:checked + .checkbox { background: $dark-gray;}
+
+article.type-system-sans h1 {
+  color: $orange;
+}
 
 /* Navigation */
 header.navigation .logo {
@@ -65,6 +76,8 @@ header.navigation ul li.nav-link a {}
   padding: 10px;
 }
 article.type-system-sans .header-page h2 { margin: 0;}
+article.type-system-sans a { color: $orange;}
+.content { margin-bottom: 80px;}
 
 /*  HOME PAGE */
 
@@ -136,10 +149,10 @@ header.navigation.navigation-homepage {
 }
 
 .center {
-   @include outer-container(60%);
-   @include media($laptop) {
+  @include outer-container(60%);
+  @include media($laptop) {
     @include outer-container(80%);
-   }
+  }
  }
 
 .form-center {
@@ -150,19 +163,57 @@ header.navigation.navigation-homepage {
   }
 }
 
+.course-overview {
+  padding-top: 30px;
+  @include span-columns(8);
+  @include media($mobile) {
+    @include span-columns(12);
+  }
+  @include media($laptop) {
+    @include span-columns(12);
+  }
+}
+
+.author-course-overview {
+  padding-top: 30px;
+  @include span-columns(4);
+  @include media($mobile) {
+    @include span-columns(12);
+  }
+}
+
+.col-2
+{
+  @include span-columns(2);
+  @include media($mobile) {
+    @include span-columns(12);
+  }
+}
+.col-3
+{
+  @include span-columns(3);
+  @include media($mobile) {
+    @include span-columns(12);
+  }
+}
+
+/*
+.course-content {
+  padding: 10%;
+}*/
+
  .content, .course-searches, .keywords {
   clear: both;
  }
+ .content {}
  .course-searches {width: 100%;}
 
 
- /* Main - Search*/
- 
+ /* ====   Search Elements =====*/
+ /* Main Search */
 .search_wrapper { 
   background: $dark-gray;
   @include span-columns(12);
-
-
 }
 .search_bar { 
   padding: 10px;
@@ -208,10 +259,22 @@ header.navigation.navigation-homepage {
  }
 
 
+ /* Alphabet Search */
+
+.alphabet-search-pulldown {
+  height: 20px;
+  display: block;
+  width: 300px;
+  margin: auto; 
+  margin-bottom: 40px;
+  text-align: center;
+  min-height: 15px;
+  border-top: 1px solid #e3e3e4;
+}
 
 
 
-/* User Section*/
+/* === User Section ===*/
 
 .nav-user-pic  { 
   line-height: 0;
@@ -244,30 +307,71 @@ button {
 }
 
 
-.chapter {
-  text-transform: uppercase;
+.vertical-tabs-container .vertical-tab.chapter-tab {
+  font-weight: 400;
+  font-size: 1.2em;
+  color: $dark-gray;
 }
 
 
-.lesson {
-  
+.vertical-tabs-container .vertical-tab.lesson-tab {
+  font-weight: 400;
+  font-size: 1em;
+  padding-left: 50px;
+  color: #777777;
+}
+
+.add-lesson{
+  float: left;
+  margin:15px;
+  &:hover{
+    color: black;
+  };
+}
+.vertical-tabs-container .vertical-tab.is-active {
+  font-weight: bold;
+  position: relative;
+  background-color: transparent;
+  &:after{
+    content: "";
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    right: -20px;
+    top: 50%;
+    margin-top: -13px;
+    background: image-url("arrow-right-tab.png");
+  };
 }
 
 
-/* Course Page */
+
+/* =======  Course Page =========*/
+
+
 .course-content {
   @include span-columns(11);
 }
 .course-toolbar {
   background-color: #e6e7e8;
-  min-height: 600px;
+  min-height: 400px;
   @include span-columns(1);
+}
+.vertical-tabs-container .vertical-tab-content-container.course-content {
+  height: auto;
+  padding: 3% 20% 10% 10%; 
 }
 .course-toolbar {
   text-align: center;
   position: fixed;
   right: 0;
-  height: 100%;
+  top: 50%;
+  width: 84px;
+  margin-top: -200px;
+  @include border-top-radius(15px);
+  @include border-right-radius(0px);
+  @include border-bottom-radius(0px);
+  @include border-left-radius(15px);
   .course-toolbar-item{
     margin-top: 10%;
     img { 
@@ -329,6 +433,17 @@ button {
   margin-bottom: 1px;
 }
 
+#text-form {
+  padding: 20px 0;
+  input {
+    width: 100%;
+    min-height: 200px;
+    text-align: left; 
+    padding: 20px;
+  }
+}
+
+.grid-items-lines {min-height: 400px;}
 
 /* Fade In Element */
 
@@ -391,20 +506,19 @@ $parallax-background-height: $parallax-window-height * 2;
 
 .parallax-static-content {
   color: #9A9A8A;
-  padding: 8em 0;
+  padding: 6em 0 8em;
   position: relative;
   z-index: 9;
 }
 
 .parallax-background {
-  background: url("https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/mountains.png") repeat;
+  background: image-url("section-hero-image.jpg");
   background-position: top;
-  background-size: cover;
   background-color: beige;
   height: $parallax-background-height;
   left: 0;
   position: absolute;
-  top: - $parallax-window-height / 3;
+  top:  -$parallax-window-height/3;
   width: 100%;
 }
 
@@ -473,6 +587,198 @@ $parallax-background-height: $parallax-window-height * 2;
     h4 {
       margin-bottom: 0.5em;
     }
+  }
+}
+
+
+/* Pagination */
+
+.pagination {
+  height:  30px;
+}
+
+.previous_page {
+float: left;  
+}
+
+.next_page {
+float: right;
+}
+
+
+/* Course Overview */
+
+.course-overview-stats {
+  padding: 10px 0;
+}
+.course-overview-description {
+  padding: 20px 0;
+}
+
+
+/* Student Courses */
+
+
+.bookshelf-button {
+  padding: 4px 20px;
+  float: right;
+
+  img { vertical-align: middle;}
+}
+
+
+/* About Page */
+
+.about-section-icons {
+  background-color: $orange;
+  &:before {
+   content: "";
+   display: block;
+   position: absolute;
+   left: 0;
+   height: 400px;
+   width: 100%;
+   background-color: $orange;
+   z-index: -1000;
+  };
+
+  &:after {
+   content: "";
+   clear: both;
+   display: table;
+   margin-bottom:  30px;
+  };
+
+}
+.about-section-icon {
+ text-align: center;
+ @include border-top-radius(10px);
+ @include border-right-radius(10px);
+ @include border-bottom-radius(10px);
+ @include border-left-radius(10px);
+ border: 1px solid $light-gray;
+ margin-bottom: 20px;
+ margin-top: 40px;
+ padding: 15px;
+ min-height:  300px;
+ background-color: white; 
+
+}
+
+.about-content {
+  h1, h2, h3, p{
+    text-align: center;
+  }
+}
+
+/* Parallax Overwrite */
+
+article.type-system-sans h1 .about-message {
+  font-size: 2em;
+  color: white;
+}
+
+article.type-system-sans .button-hero-image {
+  background: white;
+  color: $orange!important;
+  margin: 15px;
+  padding: 10px 50px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+
+/* Sticky Footer */
+html, body {height: 100%;}
+
+#wrap {min-height: 100%;}
+
+#main {overflow:auto;
+   padding-bottom: 200px;}  /* must be same height as the footer */
+
+#footer {position: relative;
+   margin-top: -200px; /* negative value of footer height */
+   height: 200px;
+   clear:both;
+   padding: 20px;
+ } 
+/*end sticky footer */
+
+.footer-wrapper {
+  position: relative;
+  background-color: #333;
+  color: $light-gray;
+  text-align: center;
+  p{
+    color: $light-gray!important;
+    text-align: center;
+  }
+  .container {
+    text-align: center;
+  }
+}
+/* Footer about Page only */
+.footer-about-wrapper {
+  margin-bottom: -80px;
+}
+#footer-about { 
+  padding: 30px;
+  height: 200px; 
+  clear: both;
+}
+
+
+
+/*  Chapters and Lesson on Course */
+
+.add-chapter-btn {
+  float: right;
+  background-color: none;
+  padding: 0;
+}
+
+.editable {
+  color: $dark-gray;
+  border: 1px dashed $light-gray;
+  padding: 8px;
+  iframe {
+    width: 100%;
+    height: 500px;
+    @include media($mobile) {
+      height:159px;
+    }
+    @include media($desktop){
+      height:359px;
+    } 
+  }
+
+}
+.editable-click:hover, a.editable-click:hover {
+  color: black;
+  border: 1px dashed $dark-gray;
+}
+
+.editable-wrap {
+  width: 100%;
+  .editable-input {
+    width: 100%;
+    min-height:150px;
+  }
+}
+.editable-buttons {
+  button {
+    background: $dark-gray;
+    border: black;
+    padding: 5px 15px;
+    font-size: .9em;
+    box-shadow: none;
+    &:hover {
+      background: $dark-gray;
+      border: black;
+      padding: 5px 15px;
+      font-size: .9em;
+      box-shadow: none;
+    };
   }
 }
 

@@ -7,11 +7,6 @@ before_action :authenticate_user!
     @user_courses_teaching = Course.joins(:users).where(:user_courses => {:user_id => current_user.id, :user_type => "teacher"})
 
     @user_courses_learning = Course.joins(:users).where(:user_courses => {:user_id => current_user.id, :user_type => "student"})
-
-
-
-
-
       
   end
 

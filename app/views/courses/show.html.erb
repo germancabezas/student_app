@@ -1,39 +1,33 @@
-<div class="header-page">
-<h2><%= @course.name %></h2>
-</div>
-  <article class="type-system-sans course-content"> 
-  <div class="vertical-tabs-container">
-    <div class="vertical-tabs">
-      <% @chapters.each do |chapter| %>
-        <a href="javascript:void(0)" class="chapter js-vertical-tab vertical-tab" rel="<%='chapter' + chapter.id.to_s %>">
-          <%= chapter.name %>          
-        </a>
-        <% chapter.lessons.each do |lesson| %>
-          <a href="javascript:void(0)" class="js-vertical-tab vertical-tab" rel="<%= 'lesson' + lesson.id.to_s %>">
-            <%= lesson.name %>    
-          </a>
-        <% end %>
+<div class="center" >
+  <div class="course-overview">
+    <h1><%= @course.name %></h1>
+    <div class="course-overview-image">
+      <img src="<%= @course.image.url %>">
+      <div class="course-overview-stats">
+        <a href="/studentcourses/<%= @course.id %>" class="button"> View Course </a>
+      </div>
+      <div class="course-overview-description">
+        <%= @course.description %>
+      </div>
+    </div>
+  </div>
+
+  <div class="author-course-overview">
+    <div class="author-info">
+      <h2> Author </h2>
+      <hr>
+      <% @authors_array.each do |author| %>
+        <h3><%= author.name %>
+        <%= author.last_name %></h3>
+        <img src="<%= author.profile_image.url %>">
+        <hr>
+        <p> <%= author.description %> </p>
+        <hr>
       <% end %>
     </div>
-    <div class="vertical-tab-content-container course-tab-content-container">
-      <% @chapters.each do |chapter| %>
-        <a href="" class="js-vertical-tab-accordion-heading vertical-tab-accordion-heading is-active" rel="<%= 'chapter' + chapter.id.to_s %>">
-        </a>
-        <div id="<%= 'chapter' + chapter.id.to_s %>" class="js-vertical-tab-content vertical-tab-content course-tab-content">
-            <h1> <%= chapter.name %> </h1>
-            <p> <%= chapter.description %> </p>
-        </div>
-        <% chapter.lessons.each do |lesson| %>
-          <a href="" class="js-vertical-tab-accordion-heading vertical-tab-accordion-heading" rel="<%= 'lesson' + lesson.id.to_s %>">
-          </a>
-          <div id="<%= 'lesson' + lesson.id.to_s %>" class="js-vertical-tab-content vertical-tab-content">
-              <p> <%= lesson.description %> </p>
-          </div>
-         <% end %>
-       <% end %>
-     </div>
-   </div>
-  </article>
+  </div>
+</div>
+
 
 
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150401035459) do
+ActiveRecord::Schema.define(version: 20150412145644) do
 
   create_table "chapters", force: :cascade do |t|
     t.string   "name",        limit: 255
@@ -33,6 +33,8 @@ ActiveRecord::Schema.define(version: 20150401035459) do
     t.string   "description", limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "image",       limit: 255
+    t.integer  "public",      limit: 4
   end
 
   create_table "lesson_elements", force: :cascade do |t|
@@ -42,8 +44,8 @@ ActiveRecord::Schema.define(version: 20150401035459) do
     t.integer  "priority",     limit: 4
     t.integer  "chapter_id",   limit: 4
     t.integer  "lesson_id",    limit: 4
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "lessons", force: :cascade do |t|

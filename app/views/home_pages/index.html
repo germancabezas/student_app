@@ -9,7 +9,6 @@
       <ul id="js-navigation-menu" class="navigation-menu show">
         <li class="nav-link"><a href="/home_pages/about">About</a></li>
         <li class="nav-link"><a href="/courses">Courses</a></li>
-        <li class="nav-link"><a href="/searches">Keyword Search</a></li>
         <li class="nav-link"><a href="/courses/new">Create course</a></li>
         <% if user_signed_in? %> 
           <li class="nav-link more">
@@ -38,12 +37,16 @@
 <div class="search-home-page">
   <div class="center">
     <div class="search_bar search_bar-homepage">
-      <%= form_tag '/searches', :method => :get do %>
+      <%= form_tag '/courses', :method => :get do %>
         <div class="search-field">
-          <%= text_field_tag :tag %>
+          <%= text_field_tag :search, nil %>
         </div>
           <%= submit_tag "Search", :class => 'search-btn' %>
       <% end %> 
     </div> 
   </div >
 </div>
+
+
+
+

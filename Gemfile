@@ -45,5 +45,6 @@ group :development, :test do
   gem 'bourbon'
   gem 'neat'
   gem 'carrierwave'
+  gem 'will_paginate', '~> 3.0.6'
 end
 

@@ -1,41 +1,118 @@
 (function() {
   "use strict";
 
-  angular.module("app", ['ngSanitize','xeditable']).controller("lessonCtrl", function($scope, $http){
+  angular.module("app").controller("lessonCtrl", function($scope, $http, $sce, FileUploader){
+
     $scope.fetchLesson = function(id) {
       $http.get("/lesson_elements/" + id + ".json").then(function(response) {
-        buildHtml(response.data["elements"]);
+        $scope.lessonElements = response.data["elements"];
+        $scope.lessonId = id;
+        $scope.chapterId = null;
       });
     };
 
 
     $scope.fetchChapter = function(id) {
       $http.get("/chapter_elements/" + id + ".json").then(function(response) {
-        buildHtml(response.data["elements"]);
+        $scope.lessonElements = response.data["elements"];
+        $scope.chapterId = id;
+        $scope.lessonId = null;
       });
     };
 
+    $scope.showTitleForm = function() {
+      $scope.titleFormVisible = true;
+    };
+    $scope.saveTitle = function(newTitle) {
+      var lessonElement = {
+        element_type: "title",
+        element_text: newTitle,
+        lesson_id: $scope.lessonId,
+        chapter_id: $scope.chapterId
+      };
+      $http.post('/lesson_elements.json', lessonElement).then(function(response) {
+          $scope.lessonElements.push(lessonElement)
+        });
+      $scope.titleFormVisible = false;
+    };
 
-    function buildHtml(elements) {
-      var html = ""
-      for(var i = 0; i < elements.length; i++){
-        var element = elements[i];
-        if(element["element_type"] === "image"){
-          html += "<img src='" + element["element_url"] + "' width='300' height='auto'>"
-        }
-        else if(element["element_type"] === "text"){
-          html += "<p>" + element["element_text"] + "</p>"
-        }
-        else if(element["element_type"] === "title"){
-          html += "<h2>" + element["element_text"] + "</h2>"
-        }
+
+    $scope.showTextForm = function() {
+      $scope.textFormVisible = true;
+    };
+    $scope.saveText = function(newText) {
+      var lessonElement = {
+        element_type: "text",
+        element_text: newText,
+        lesson_id: $scope.lessonId,
+        chapter_id: $scope.chapterId
+      };
+      $http.post('/lesson_elements.json', lessonElement).then(function(response) {
+          $scope.lessonElements.push(lessonElement)
+        });
+      $scope.textFormVisible = false;
+    };
+
+
+
+    $scope.showVideoField = function() {
+      $scope.videoFieldVisible = true;
+    };
+    $scope.saveVideo = function(newVideo) {
+      var lessonElement = {
+        element_type: "video",
+        element_text: newVideo,
+        lesson_id: $scope.lessonId,
+        chapter_id: $scope.chapterId
+      };
+      $http.post('/lesson_elements.json', lessonElement).then(function(response) {
+          $scope.lessonElements.push(lessonElement)
+        });
+      $scope.videoFieldVisible = false;
+    };
+    $scope.makeTrust = function(html){
+      return $sce.trustAsHtml(html);
+    };
+
+
+
+    $scope.showUploader = function() {
+      $scope.imageUploaderVisible = true;
+    };
+
+    $scope.uploadImage = function() {
+      if ($scope.lessonId) {
+        $scope.uploader = new FileUploader({url: '/lesson_elements.json?lesson_id='+ $scope.lessonId + '&element_type=image'} );
+      } else if ($scope.chapterId) {
+        $scope.uploader = new FileUploader({url: '/lesson_elements.json?chapter_id='+ $scope.chapterId + '&element_type=image'} );
       }
+      $scope.uploader.onCompleteAll = function() {
+        var lessonElement = {
+          element_type: "image",
+          element_url: "",
+          lesson_id: $scope.lessonId,
+          chapter_id: $scope.chapterId
+        };
+        $scope.lessonElements.push(lessonElement);
+        // $scope.$apply();
+      };
+    };
 
-      $scope.htmlElement = html;
-    }
+
+
+
+// send a patch request 
+// Do and update in the controller
+   
+
+
 
     window.scope = $scope;
   });
 
 }());
+
+
+
+
 

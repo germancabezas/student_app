@@ -1,33 +1,51 @@
 <div ng-controller="lessonCtrl">
-  <% @studentcourse_array.each do | course | %>
-    <div class="header-page">
-    <h2><%= course.name %></h2>
-    </div>
-      <article class="type-system-sans course-content"> 
-        <div class="vertical-tabs-container">
-          <div class="vertical-tabs">
-            <% course.chapters.each do |chapter| %>
-              <a ng-click="fetchChapter(<%=chapter.id%>)" href="javascript:void(0)" class="chapter js-vertical-tab vertical-tab" rel="<%='chapter' + chapter.id.to_s %>"><%= chapter.name %></a>
-                <% chapter.lessons.each do |lesson| %>
-                  <a ng-click="fetchLesson(<%=lesson.id%>)" href="javascript:void(0)" class="js-vertical-tab vertical-tab" rel="<%='lesson' + lesson.id.to_s %>"><%= lesson.name %></a>
-                <% end %>
-            <% end %>
-          </div>
-          <div class="vertical-tab-content-container course-tab-content-container">
-            <div ng-bind-html="htmlElement">
-              
-            </div>
-          </div>
+  <div class="header-page">
+    <% if current_user %>
+      <a class="button bookshelf-button" href="">
+        <img src="<%= asset_path 'bookshelf-btn.png'%>">
+        Add to Bookshelf 
+      </a>
+    <% else %>
+    <a class="button bookshelf-button" href="/users/sign_up">
+      <img src="<%= asset_path 'bookshelf-btn.png'%>">
+      Add to Bookshelf 
+    </a>
+    <% end %>
+    <h2><%= @course.name %></h2>
+  </div>
+    <article class="type-system-sans"> 
+      <div class="vertical-tabs-container">
+        <div class="vertical-tabs">
+          <% @course.chapters.each do |chapter| %>
+            <a ng-click="fetchChapter(<%=chapter.id%>)" href="javascript:void(0)" class="chapter-tab js-vertical-tab vertical-tab" rel="<%='chapter' + chapter.id.to_s %>"><%= chapter.name %> </a>
+              <% chapter.lessons.each do |lesson| %>
+                <a ng-click="fetchLesson(<%=lesson.id%>)" href="javascript:void(0)" class="js-vertical-tab vertical-tab lesson-tab" rel="<%='lesson' + lesson.id.to_s %>"><%= lesson.name %> </a>
+              <% end %>
+          <% end %>   
         </div>
-     </article>
-  <% end %>
+        <div class="vertical-tab-content-container course-tab-content-container course-content">
+            <div ng-repeat="lessonElement in lessonElements | orderBy:lessonElement.element_priority:true">
+              <div ng-if="lessonElement.element_type === 'text'">
+                <p onbeforesave="updateElement($data)">{{ lessonElement.element_text }}</p>
+              </div>
+              <div ng-if="lessonElement.element_type === 'title'">
+                <h1>{{ lessonElement.element_text }}</h1>
+              </div>
+              <div ng-if="lessonElement.element_type === 'image'">
+                <img src="{{ lessonElement.element_url }}" width="300" height="auto">
+              </div>
+              <div ng-if="lessonElement.element_type === 'video'">
+                <div ng-bind-html="makeTrust(lessonElement.element_text)">
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+  <!-- TOOL BAR -->
+  </article>
 </div>
 
+   
 
 
 
-
-
-
-
- 

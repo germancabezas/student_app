@@ -133,7 +133,7 @@ $(document).ready(function() {
 
 
 
-//================ Parallax 
+//================ Parallax ============
 
 
 $(document).ready(function() {
@@ -166,5 +166,16 @@ function parallax(){
     plxBackground.css('top', - (plxWindowTopToWindowTop * plxSpeed) + 'px');
   }
 }
+
+
+//================ SLIDE PANEL  ============
+
+
+$(document).ready(function(){
+  $('.sliding-panel-button,.sliding-panel-fade-screen,.sliding-panel-close').on('click touchstart',function (e) {
+    $('.sliding-panel-content,.sliding-panel-fade-screen').toggleClass('is-visible');
+    e.preventDefault();
+  });
+});
 
 

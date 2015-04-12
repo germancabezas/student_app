@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
   devise_for :users
   resources :courses
+  patch 'courses/:id/publish' => 'courses#publish'
   get '/' => 'home_pages#index', :as => :home_pages
   get '/home_pages/about' => 'home_pages#about'
 
@@ -11,13 +12,11 @@ Rails.application.routes.draw do
   resources :chapters
   resources :lessons
   get '/searches' => 'searches#index'
-
-
   get 'users/:id' => 'users#show', :as => 'user'
   patch 'users/:id' => 'users#update'
-
   # API 
   get 'lesson_elements/:id' => 'lesson_elements#show'
+  post 'lesson_elements' => 'lesson_elements#save'
   get 'chapter_elements/:id' => 'chapter_elements#show'
 
 

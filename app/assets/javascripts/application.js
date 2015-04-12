@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require angular
+//= require angular-file-upload
 //= require angular_sanitize
 //= require xeditable
 //= require app

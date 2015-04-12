@@ -4,6 +4,20 @@
       <%=form_tag'/courses' do%>
         <%=label_tag :name%>
         <%=text_field_tag :name%>
-        <%=submit_tag "Add"%>
+
+        <%=label_tag :description%>
+        <%=text_field_tag :description%>
+
+        <%=label_tag :image%>
+        <%=file_field_tag :image%>
+
+        <%=submit_tag " Create Course "%>
       <%end%>
+
+     
 </div>
+
+
+
+
+

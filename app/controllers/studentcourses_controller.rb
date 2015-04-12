@@ -5,8 +5,11 @@ class StudentcoursesController < ApplicationController
   end
 
   def show
-    @studentcourse_array = Course.joins(:users).where(:user_courses => {:user_id => current_user.id, :user_type => "student", :course_id => params[:id]})
-    
+    @course = Course.find(params[:id])
+
+    @studentcourse_array = Course.joins(:users).where(:user_courses => {:course_id => params[:id]})
+    p "==================="
+    # p @studentcourse_array
   end
 
 

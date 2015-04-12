@@ -1,6 +1,5 @@
 <header class="navigation" role="banner">
   <div class="navigation-wrapper">
-    <article class="type-system-sans"> 
     <a href="/">
       <img class="logo" src="<%= asset_path 'logo_opencourse.png'%>">
     </a>
@@ -9,7 +8,6 @@
       <ul id="js-navigation-menu" class="navigation-menu show">
         <li class="nav-link"><a href="/home_pages/about">About</a></li>
         <li class="nav-link"><a href="/courses">Courses</a></li>
-        <li class="nav-link"><a href="/searches">Keyword Search</a></li>
         <li class="nav-link"><a href="/courses/new">Create course</a></li>
         <% if user_signed_in? %> 
           <li class="nav-link more">
@@ -29,7 +27,6 @@
         <% end %>
       </ul>
     </nav>
-  </article>
   </div>
 </header>
 
@@ -49,38 +46,91 @@
 </div>
 
 
-
-
-
-
-
 <div class="container">
   <div id="js-parallax-window" class="parallax-window">
     <div class="parallax-static-content">
-      <b>Parallax Window</b>
+      <img src="<%= asset_path 'open-book-icon.png'%>" >
+      <h1 class="about-message">Start Learning or create your course</h1>
+      <a href="/courses" class="button button-hero-image"> Learn </a>
+      <a href="/courses/new" class="button button-hero-image"> Teach </a>
     </div>
     <div id="js-parallax-background" class="parallax-background"></div>
   </div>
 </div>
 
 <div class="center">
-  <head>
-    <link href='//fonts.googleapis.com/css?family=PT+Sans:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-    <link href='//fonts.googleapis.com/css?family=Titillium+Web:400,400italic,600italic,600,700,700italic,900,300italic,300,200italic,200' rel='stylesheet' type='text/css'>
-  </head>
+  <article class="type-system-sans about-content">
+    <br>
+    <br>
+    <h1>About Open Course </h1>
+    <h2>If you only read the books that everyone else is reading, you can only think what everyone else is thinking.</h2>
+    <p>
+      Education is the imparting and acquiring of knowledge through teaching and learning, especially at a school or similar institution. The earliest educational processes involved sharing information about gathering food and providing shelter; making weapons and other tools; learning language; and acquiring the values, behaviour, and religious rites or practices of a given culture. Before the invention of reading and writing, people lived in an environment in which they struggled to survive against natural forces, animals, and other humans. To survive, preliterate people developed skills that grew into cultural and educational patterns.
 
-  <article class="type-system-sans">
-    <p class="type">Article Type</p>
-    <h1>Article Heading</h1>
-    <h2>These override some of the styles specified in the <code>_variables.scss</code> and <code>_typography.scss</code> partials in <a href="//bitters.bourbon.io">Bitters</a>. You can replace the typography variables and the header font specifications in Bitters with these styles. Then you won&rsquo;t need the wrapping class <code>.type-system-name</code>.</h2>
-    <p class="date">30 Mar 2014</p>
-    <p><span>Lorem ipsum dolor sit amet</span>, consectetur adipisicing elit. Consequatur a, ullam, voluptatum incidunt neque doloremque vel inventore distinctio laudantium harum</a> illo quam nulla dolor alias iure impedit! Accusamus! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur, a, ullam, voluptatum incidunt neque porro numquam doloremque vel inventore distinctio laudantium harum illo quam nulla dolor alias iure impedit.
-      <a href="javascript:void(0)" class="read-more">Read More <span>&rsaquo;</span></a>
+      Education developed from the human struggle for survival and enlightenment. It may be formal or informal. Informal education refers to the general social process by which human beings acquire the knowledge and skills needed to function in their culture. Formal education refers to the process by which teachers instruct students in courses of study within institutions.
     </p>
-    <h3>Subheading lorem</h3>
-    <p><span>Consequatur ullam, voluptatum</span> incidunt neque porro numquam doloremque vel inventore distinctio laudantium harum illo quam nulla dolor alias iure impedit. Accusamus. Consequatur, a, ullam, voluptatum incidunt neque porro numquam doloremque vel inventore distinctio laudantium harum illo quam nulla dolor alias iure impedit! Accusamus.</p>
-    <hr>
-    <p class="author">Author Name</p>
+    <br>
+    <br>
+    <h1> Some of Our Tools </h1>
+    <h2> Here are some of the things you can do with Open Course </h2>
+    <div class="about-section-icons">
+      <div class="col-3 about-section-icon">
+        <img src="<%= asset_path 'text-field.png'%>" >
+        <h3> Add your Content </h3>
+        <p>
+          Nullam id dolor id nibh ultricies veh ligula porta felis euismod semper.
+        </p>
+      </div>
+      <div class="col-3 about-section-icon">
+        <img src="<%= asset_path 'image.png'%>" >
+        <h3> Add Images </h3>
+        <p>
+          Nullam id dolor id nibh ultricies veh ligula porta felis euismod semper.
+        </p>
+      </div>
+      <div class="col-3 about-section-icon">
+        <img src="<%= asset_path 'video.png'%>">
+        <h3> Embed Videos </h3>
+        <p>
+          Nullam id dolor id nibh ultricies veh ligula porta felis euismod semper.
+        </p>
+      </div>
+      <div class="col-3 about-section-icon">
+        <img src="<%= asset_path 'file.png'%>">
+        <h3> Attach Files </h3>
+        <p>
+          Nullam id dolor id nibh ultricies veh ligula porta felis euismod semper.
+        </p>
+      </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <h1>In a modern Education System </h1>
+    <h2> Why is so Hard to find good Documentation </h2>
+    <p>
+      Modern day education is aided with a variety of technology, computers, projectors, internet, and many more. Diverse knowledge is being spread among the people. Everything that can be simplified has been made simpler. Science has explored every aspect of life. There is much to learn and more to assimilate. Internet provides abysmal knowledge. There is no end to it. One can learn everything he wishes to. Every topic has developed into a subject.
+    </p>
+    <p>
+      Firstly our education is confined to schools and colleges. It has become a process of spoon feeding. “Spoon feeding in the long run teaches us nothing but the shape of the spoon” were the words of E.M.Forster. We are being fed with facts and knowledge. Not art, not books, but life itself is the true basis of teaching and learning. Cramming of facts and dates, hi-fi mathematical formulas, theories and doctrines should be at college levels when one has chosen his area of interest. What will the history pay a doctor or a mathematician, or medical terms to a historian?
+    </p>
+    <br>
+    <br>
+    <br>
   </article>
-
+</div>
+<div class="footer-break"></div>
+<div class="footer-wrapper footer-about-wrapper">
+  <div class="center"> 
+    <article class="type-system-sans"> 
+      <div id="footer-about">
+        <div class="container">
+         <img src="<%= asset_path 'open-book-icon.png'%>">
+          <p>
+              <span class="copyright"> This website is for educational purposes only. Al rights reserved. German Cabezas 2015 - ACLTC Capstone 
+          </p>
+        </div>
+      </div> <!-- End footer -->
+    <article class="type-system-sans"> 
+  </div>
 </div>

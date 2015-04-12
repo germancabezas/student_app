@@ -5,81 +5,99 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+
+  <link href='//fonts.googleapis.com/css?family=PT+Sans:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+  <link href='//fonts.googleapis.com/css?family=Titillium+Web:400,400italic,600italic,600,700,700italic,900,300italic,300,200italic,200' rel='stylesheet' type='text/css'>
+
+
 </head>
 <body>
-
+  <!-- Sticky Footer  -->
+  <div id="wrap">
+    <div id="main">
   <!-- Navigation -->
-
-  <header class="navigation" role="banner">
-    <div class="navigation-wrapper">
-      <article class="type-system-sans"> 
-      <a href="/">
-        <img class="logo" src="<%= asset_path 'logo_opencourse.png'%>">
-      </a>
-      <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">MENU</a>
-      <nav role="navigation">
-        <ul id="js-navigation-menu" class="navigation-menu show">
-          <li class="nav-link"><a href="/home_pages/about">About</a></li>
-          <li class="nav-link"><a href="/courses">Courses</a></li>
-          <li class="nav-link"><a href="/searches">Keyword Search</a></li>
-          <li class="nav-link"><a href="/courses/new">Create course</a></li>
-          <% if user_signed_in? %> 
-            <li class="nav-link more">
-              <a class="nav-user-pic" href="/usercourses">
-                <img src=<%= current_user.profile_image %> >
-              </a>
-              <ul class="submenu">
-                <li><a href="/usercourses">Dashboard</a></li>
-                <li><a href="/users/<%= current_user.id %>">Profile</a></li>
-                <li><a href="/users/edit">Settings</a></li>
-                <li><a href="/users/sign_out">LOGOUT</a></li>
-              </ul>
-            </li>
-          <% else %> 
-            <a class="button-simple" href="/users/sign_in"> Log In </a>
-            <a class="button" href="/users/sign_up"> Sign Up </a>
-          <% end %>
-        </ul>
-      </nav>
-    </article>
-    </div>
-  </header>
-
-  <!-- Search -->
-  <div class="search_wrapper">
-    <div class="center">
-      <div class="search_bar">
-        <%= form_tag '/courses', :method => :get do %>
-          <h2 class="search_bar_message"> I want to learn: </h2>
-        <div class="search_bar_field">
-          <%= text_field_tag :search %>
+      <header class="navigation" role="banner">
+        <div class="navigation-wrapper">
+          <article class="type-system-sans"> 
+          <a href="/">
+            <img class="logo" src="<%= asset_path 'logo_opencourse.png'%>">
+          </a>
+          <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">MENU</a>
+          <nav role="navigation">
+            <ul id="js-navigation-menu" class="navigation-menu show">
+              <li class="nav-link"><a href="/home_pages/about">About</a></li>
+              <li class="nav-link"><a href="/courses">Courses</a></li>
+              <li class="nav-link"><a href="/courses/new">Create course</a></li>
+              <% if user_signed_in? %> 
+                <li class="nav-link more">
+                  <a class="nav-user-pic" href="/usercourses">
+                    <img src=<%= current_user.profile_image %> >
+                  </a>
+                  <ul class="submenu">
+                    <li><a href="/usercourses">Dashboard</a></li>
+                    <li><a href="/users/<%= current_user.id %>">Profile</a></li>
+                    <li><a href="/users/edit">Settings</a></li>
+                    <li><a href="/users/sign_out">LOGOUT</a></li>
+                  </ul>
+                </li>
+              <% else %> 
+                <a class="button-simple" href="/users/sign_in"> Log In </a>
+                <a class="button" href="/users/sign_up"> Sign Up </a>
+              <% end %>
+            </ul>
+          </nav>
+        </article>
         </div>
-          <%= submit_tag "Search", :class => 'search_bar_btn' %>
-        <% end %>  
+      </header>
+
+      <!-- Search -->
+      <div class="search_wrapper">
+        <div class="center">
+          <div class="search_bar">
+            <%= form_tag '/courses', :method => :get do %>
+              <h2 class="search_bar_message"> I want to learn: </h2>
+            <div class="search_bar_field">
+              <%= text_field_tag :search %>
+            </div>
+              <%= submit_tag "Search", :class => 'search_bar_btn' %>
+            <% end %>  
+          </div>
+        </div>
+      </div>
+    <!-- flash -->
+      <% flash.each do |name, message| %>
+        <div class="flash-<%= name %>">
+          <span>
+            <%= message %>
+          </span>
+        </div>
+      <% end %>
+
+      <div ng-app="app" class="container">
+        <div class="content">
+          <article class="type-system-sans"> 
+            <%= yield %>
+          </article> 
+
+        </div>
       </div>
     </div>
   </div>
-
-
-<!-- flash -->
-<% flash.each do |name, message| %>
-  <div class="flash-<%= name %>">
-    <span>
-      <%= message %>
-    </span>
-  </div>
-<% end %>
-
-  <div ng-app="app" class="container">
-    <div class="content">
+<!-- Footer -->
+  <div class="footer-wrapper">
+    <div class="center"> 
       <article class="type-system-sans"> 
-        <%= yield %>
-      </article> 
-
+        <div id="footer">
+          <div class="container">
+           <img src="<%= asset_path 'open-book-icon.png'%>">
+            <p>
+                <span class="copyright"> This website is for educational purposes only. Al rights reserved. German Cabezas 2015 - ACLTC Capstone 
+            </p>
+          </div>
+        </div> <!-- End footer -->
+      <article class="type-system-sans"> 
     </div>
   </div>
-<!-- Footer -->
-
 </body>
 </html>
 
