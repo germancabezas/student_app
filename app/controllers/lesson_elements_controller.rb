@@ -9,9 +9,9 @@ class LessonElementsController < ApplicationController
     @new_lesson_element = LessonElement.create(:element_type => params[:element_type], :text => params[:element_text], :lesson_id => params[:lesson_id], :chapter_id => params[:chapter_id], :url => params[:file])
     @new_lesson_element.save
     p params
-    respond_to do |format|
-      format.json { head :ok }
-    end
+    # respond_to do |format|
+    #   format.json { head :ok }
+    # end
   end
 end
 

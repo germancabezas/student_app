@@ -732,10 +732,11 @@ html, body {height: 100%;}
 /*  Chapters and Lesson on Course */
 
 .add-chapter-btn {
-  float: right;
+  float: left;
   background-color: none;
   padding: 0;
 }
+
 
 .editable {
   color: $dark-gray;

@@ -86,10 +86,12 @@
       } else if ($scope.chapterId) {
         $scope.uploader = new FileUploader({url: '/lesson_elements.json?chapter_id='+ $scope.chapterId + '&element_type=image'} );
       }
-      $scope.uploader.onCompleteAll = function() {
+
+      $scope.uploader.onSuccessItem = function(item, response, status, headers) {
+
         var lessonElement = {
           element_type: "image",
-          element_url: "",
+          element_url: response.element_url,
           lesson_id: $scope.lessonId,
           chapter_id: $scope.chapterId
         };
