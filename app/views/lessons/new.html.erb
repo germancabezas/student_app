@@ -1,0 +1,14 @@
+<div class="center">
+  <br>
+  
+  <h2> Add New Lesson for Chapter: <strong> <%= @chapter.name %></strong></h2>
+
+  <%=form_tag'/lessons' do%>
+    <%=label_tag :name%>
+    <%=text_field_tag :name%>
+
+    <%= hidden_field_tag :chapter_id, @chapter.id %>
+    <%= hidden_field_tag :id, @course.id %>
+    <%=submit_tag "Add"%>
+  <%end%>
+</div>

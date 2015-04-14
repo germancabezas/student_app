@@ -1,8 +1,7 @@
 class ChaptersController < ApplicationController
 
   def new
-
-    @course = Chapter.find(1)
+    @course = Course.find(params[:id])
   end
 
   def create

@@ -1,20 +1,28 @@
 <div ng-controller="lessonCtrl">
   <div class="header-page">
-    <% if current_user %>
-      <a class="button bookshelf-button" href="">
-        <img src="<%= asset_path 'bookshelf-btn.png'%>">
-        Add to Bookshelf 
-      </a>
-    <% else %>
-    <a class="button bookshelf-button" href="/users/sign_up">
-      <img src="<%= asset_path 'bookshelf-btn.png'%>">
-      Add to Bookshelf 
-    </a>
-    <% end %>
-    <h2><%= @course.name %></h2>
+    <div class="col-4 ">
+      <h1></h1>
+    </div>
+    <div class="col-4 course-name">
+      <h2><%= @course.name %></h2>
+    </div>
+    <div class="col-4 course-menu">
+      <% if current_user %>
+        <%= form_tag("/usercourses/#{@course.id}/bookshelf", method: "post") do %>
+          <%= hidden_field_tag :course_id, "#{@course.id.to_i}" %>
+          <%= hidden_field_tag :user_id, current_user.id %>
+          <%= submit_tag("Add to Bookshelf", :class=> "bookshelf-button") %>
+        <% end %>
+      <% else %>
+        <a class="button bookshelf-button" href="">
+          <img src="<%= asset_path 'bookshelf-btn.png'%>">
+          Add to Bookshelf 
+        </a>
+      <% end %>
+    </div>
   </div>
     <article class="type-system-sans"> 
-      <div class="vertical-tabs-container">
+      <div class="vertical-tabs-container course-tabs">
         <div class="vertical-tabs">
           <% @course.chapters.each do |chapter| %>
             <a ng-click="fetchChapter(<%=chapter.id%>)" href="javascript:void(0)" class="chapter-tab js-vertical-tab vertical-tab" rel="<%='chapter' + chapter.id.to_s %>"><%= chapter.name %> </a>
@@ -24,6 +32,7 @@
           <% end %>   
         </div>
         <div class="vertical-tab-content-container course-tab-content-container course-content">
+          <div class="lesson-elements">
             <div ng-repeat="lessonElement in lessonElements | orderBy:lessonElement.element_priority:true">
               <div ng-if="lessonElement.element_type === 'text'">
                 <p onbeforesave="updateElement($data)">{{ lessonElement.element_text }}</p>
@@ -31,17 +40,17 @@
               <div ng-if="lessonElement.element_type === 'title'">
                 <h1>{{ lessonElement.element_text }}</h1>
               </div>
-              <div ng-if="lessonElement.element_type === 'image'">
-                <img src="{{ lessonElement.element_url }}" width="300" height="auto">
+              <div class="image-element" ng-if="lessonElement.element_type === 'image'">
+                <img class="course-image-element" src="{{ lessonElement.element_url }}">
               </div>
               <div ng-if="lessonElement.element_type === 'video'">
-                <div ng-bind-html="makeTrust(lessonElement.element_text)">
+                <div class="video-element" ng-bind-html="makeTrust(lessonElement.element_text)">
                 </div>
               </div>
             </div>
+          </div>
         </div>
       </div>
-  <!-- TOOL BAR -->
   </article>
 </div>
 

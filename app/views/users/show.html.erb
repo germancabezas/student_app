@@ -4,7 +4,9 @@
   <br>
   <div class="left_block">
     <div class="profile-image">
-      <img src=<%= current_user.profile_image %> >
+      <div class="user-profile-image">
+        <img src=<%= current_user.profile_image %> >
+      </div>
       <%= form_for @user do |f| %>
         <%= f.file_field :profile_image %>
         <%= f.submit %>

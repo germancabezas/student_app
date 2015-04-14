@@ -1,20 +1,17 @@
 <div class="center">
 
       <h1> Add a new course </h1>
-      <%=form_tag'/courses' do%>
-        <%=label_tag :name%>
-        <%=text_field_tag :name%>
+      <%=form_for Course.new do |f| %>
+        <%=f.label :name%>
+        <%=f.text_field :name%>
 
-        <%=label_tag :description%>
-        <%=text_field_tag :description%>
+        <%=f.label :description%>
+        <%=f.text_field :description%>
 
-        <%=label_tag :image%>
-        <%=file_field_tag :image%>
-
-        <%=submit_tag " Create Course "%>
-      <%end%>
-
-     
+        <%=f.label :image%>
+        <%=f.file_field :image%>
+        <%=submit_tag "Create Course"%>
+      <%end%>     
 </div>
 
 

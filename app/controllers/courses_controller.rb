@@ -1,7 +1,7 @@
 class CoursesController < ApplicationController
 
   def index
-    @courses = Course.paginate(:page => params[:page], :per_page => 6).where(:public => 1)
+    @courses = Course.paginate(:page => params[:page], :per_page => 9).where(:public => 1)
     if params[:search]
       @courses = @courses.where('Name LIKE ?', "%" + params[:search] + "%")
     end
@@ -46,13 +46,18 @@ class CoursesController < ApplicationController
 
   end
 
-  def create
 
-    @new_course = Course.create(:name => params[:name], :description => params[:description], :image => params[:image])
+  def create
+    @new_course = Course.create(course_params)
     @new_user_course = UserCourse.create(:user_id => current_user.id, :course_id => "#{@new_course.id}", :user_type => "teacher")
     flash[:success] = "Your new course has been added"
     redirect_to "/teachercourses/#{@new_course.id}"
+  end
 
+  private
+
+  def course_params
+    params.require(:course).permit(:name, :description, :image)
   end
 
 end

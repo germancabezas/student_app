@@ -1,20 +1,30 @@
 <div ng-controller="lessonCtrl">
   <% @teachercourse_array.each do | course | %>
   <div class="header-page">
-    <a class="button add-chapter-btn" href="/chapters/new">  
-      Add Chapter + </a>
-    <h2><%= course.name %></h2>
-
-      <%= form_tag("/courses/#{course.id}/publish", method: "patch") do %>
-        <%= hidden_field_tag :course_id, "#{course.id.to_i}" %>
-        <%= submit_tag("Publish") %>
-      <% end %>
+    <div class="add-chapter col-4">
+      <a class="button add-chapter-btn" href="/courses/<%= course.id %>/chapters/new">
+        Add a chapter 
+      </a>
+    </div>
+    <div class="course-title col-4">
+      <h2><%= course.name %></h2>
+    </div>
+    <div class="course-menu col-4">
+      <a class="button-neutral course-overview-button" href="/courses/<%= course.id %>"> Course Overview </a>
+      <a class="button-neutral course-overview-button" href="/studentcourses/<%= course.id %>"> Preview </a>
+      <div class="publish-form">
+        <%= form_tag("/courses/#{course.id}/publish", method: "patch") do %>
+          <%= hidden_field_tag :course_id, "#{course.id.to_i}" %>
+          <%= submit_tag("Publish >", :class => "publish-button") %>
+        <% end %>
+      </div>
+    </div>
   </div>
     <article class="type-system-sans"> 
-      <div class="vertical-tabs-container">
+      <div class="vertical-tabs-container course-tabs">
         <div class="vertical-tabs">
           <% course.chapters.each do |chapter| %>
-            <a class="add-lesson" href="/lesson/new">+</a>
+            <a class="add-lesson" href="/courses/<%= course.id %>/chapters/<%= chapter.id %>/lesson/new">+</a>
             <a ng-click="fetchChapter(<%=chapter.id%>)" href="javascript:void(0)" class="chapter-tab js-vertical-tab vertical-tab" rel="<%='chapter' + chapter.id.to_s %>"><%= chapter.name %> </a> 
               <% chapter.lessons.each do |lesson| %>
                 <a ng-click="fetchLesson(<%=lesson.id%>)" href="javascript:void(0)" class="js-vertical-tab vertical-tab lesson-tab" rel="<%='lesson' + lesson.id.to_s %>"><%= lesson.name %> </a>
@@ -27,16 +37,18 @@
                 <p editable-textarea="lessonElement.element_text" onbeforesave="updateElement($data)">{{ lessonElement.element_text }}</p>
               </div>
               <div ng-if="lessonElement.element_type === 'title'">
-                <h2 editable-textarea="lessonElement.element_text">{{ lessonElement.element_text }}</h2>
+                <h1 editable-textarea="lessonElement.element_text">{{ lessonElement.element_text }}</h1>
               </div>
-              <div ng-if="lessonElement.element_type === 'image'">
-                <img src="{{ lessonElement.element_url }}" width="300" height="auto">
+              <div class="image-element" ng-if="lessonElement.element_type === 'image'">
+                <img class="course-image-element" src="{{ lessonElement.element_url }}">
               </div>
               <div ng-if="lessonElement.element_type === 'video'">
-                <div editable-textarea="lessonElement.element_text" ng-bind-html="makeTrust(lessonElement.element_text)">
+                <div class="video-element" editable-textarea="lessonElement.element_text" ng-bind-html="makeTrust(lessonElement.element_text)">
                 </div>
               </div>
             </div>
+          </div>
+          <div>
             <!-- Hidden - triggered elements -->
             <div id="text-form" ng-if="textFormVisible">
               <textarea ng-model="newText" placeholder="Enter Your Content Here"> </textarea>
@@ -51,7 +63,6 @@
               <button ng-click="saveVideo(newVideo)" class="button">Save</button>
             </div>
             <!-- Uploader -->
-
                 <div id="image-field" ng-if="imageUploaderVisible" >
                   <div ng-init="uploadImage()">
                     <input type="file" nv-file-select="" uploader="uploader" multiple /><br/>
@@ -69,15 +80,13 @@
                     </div>
                   </div>
                 </div>
-
             <!-- End Uploader -->
         </div>
       </div>
   <!-- TOOL BAR -->
   </article>
   <% end %>
-    <%=render "partials/toolbar"%>
-
+  <%=render "partials/toolbar"%>
 </div>
 
    

@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   devise_for :users
   resources :courses
   patch 'courses/:id/publish' => 'courses#publish'
+  post 'usercourses/:id/bookshelf' => 'usercourses#create'
   get '/' => 'home_pages#index', :as => :home_pages
   get '/home_pages/about' => 'home_pages#about'
 
@@ -11,6 +12,9 @@ Rails.application.routes.draw do
   resources :studentcourses
   resources :chapters
   resources :lessons
+  get '/courses/:id/chapters/new' => 'chapters#new'
+  get '/courses/:id/chapters/:chapter_id/lesson/new' => 'lessons#new'
+
   get '/searches' => 'searches#index'
   get 'users/:id' => 'users#show', :as => 'user'
   patch 'users/:id' => 'users#update'

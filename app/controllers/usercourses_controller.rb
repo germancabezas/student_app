@@ -18,5 +18,12 @@ before_action :authenticate_user!
 
   end
 
+  def create
+    @course = Course.find(params[:id])
+    @bookshelf = UserCourse.create(:user_id => params[:user_id], :course_id => params[:course_id], :user_type => "student")
+    flash[:success] = "This Course has been Saved to your Bookshelf"
+    redirect_to "/studentcourses/#{@course.id}"
+  end
+
 end
 

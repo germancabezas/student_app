@@ -19,20 +19,22 @@
       <%= will_paginate @courses, :page_links => false %>
       <hr>
       </div>
-      <div class="grid-items-lines">
+      <div class="grid-items-lines home-grid">
         <%  @courses.each do |course| %>
           <a href="/courses/<%= course.id %>" class="grid-item">
-            <img src="https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/placeholder_logo_1_dark.png" alt="">
-            
+              <div class="grid-course-image">
+                <img class="course-image-home" src="<%= course.image %>">
+              </div>
             <h1><%= course.name %></h1>
-            <p><%= course.description %></p>
+            <div class="grid-item-description">
+              <p><%= course.description %></p>
+            </div>
+            <span class="type"> Learn Now </span>
           </a>
+          <div class="right-cover"></div>
         <% end %>
-
-        <div class="right-cover"></div>
-        <div class="bottom-cover"></div>
       </div>
-      <hr>
+      <br>
       <%= will_paginate @courses, :page_links => false %>
     <% end %>
   </div>

@@ -2,27 +2,31 @@
   <div class="course-overview">
     <h1><%= @course.name %></h1>
     <div class="course-overview-image">
-      <img src="<%= @course.image.url %>">
+      <div class="course-image-wrapper">
+        <img src="<%= @course.image %>">
+      </div>
       <div class="course-overview-stats">
-        <a href="/studentcourses/<%= @course.id %>" class="button"> View Course </a>
+        <a class="button-small" href="/studentcourses/<%= @course.id %>"> View Course </a>
+        <div class="bookshelf-saves"> <span class="type">In <span class="strong">10</span> Bookshelfs</span> </div>
       </div>
       <div class="course-overview-description">
-        <%= @course.description %>
+        <h2> Course Description </h2>
+        <p><%= @course.description %></p>
       </div>
     </div>
   </div>
-
   <div class="author-course-overview">
     <div class="author-info">
       <h2> Author </h2>
       <hr>
       <% @authors_array.each do |author| %>
+        <div class="course-overview-user-pic">
+          <img class="overview-author-image" src="<%= author.profile_image.url %>">
+        </div>
         <h3><%= author.name %>
         <%= author.last_name %></h3>
-        <img src="<%= author.profile_image.url %>">
         <hr>
         <p> <%= author.description %> </p>
-        <hr>
       <% end %>
     </div>
   </div>

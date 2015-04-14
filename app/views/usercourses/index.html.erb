@@ -6,14 +6,20 @@
           <h1> Welcome <%= @user.name %></h1>
             <ul class="accordion-tabs-minimal">
               <li class="tab-header-and-content">
-                <a href="#" class="tab-link is-active">Learning</a>
+                <a href="#" class="tab-link is-active">Bookshelf</a>
                 <div class="tab-content">
-                  <div class="grid-items-lines">
+                  <div class="grid-items-lines home-grid">
                     <% @user_courses_learning.each do |course| %>
                       <a href="/courses/<%= course.id %>" class="grid-item">
-                        <img src="https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/placeholder_logo_1_dark.png" alt="">
+                        <div class="grid-course-image">
+                          <img class="course-image-home" src="<%= course.image %>">
+                        </div>
                         <h1><%= course.name %></h1>
-                        <p><%= course.description %> </p>
+                        <div class="grid-item-description">
+                          <p><%= course.description %> </p><br>
+                        </div>
+                        <span class="type"> View Course </span>
+
                       </a>
                       <div class="right-cover"></div>
                       <div class="bottom-cover"></div>
@@ -24,12 +30,17 @@
               <li class="tab-header-and-content">
                 <a href="#" class="tab-link">Teaching</a>
                   <div class="tab-content">
-                    <div class="grid-items-lines">
+                    <div class="grid-items-lines home-grid">
                       <% @user_courses_teaching.each do |course| %>
                         <a href="/teachercourses/<%= course.id %>" class="grid-item">
-                          <img src="https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/placeholder_logo_1_dark.png" alt="">
+                          <div class="grid-course-image">
+                            <img class="course-image-home" src="<%= course.image %>">
+                          </div>
                           <h1><%= course.name %></h1>
-                          <p><%= course.description %> </p><br>
+                          <div class="grid-item-description">
+                            <p><%= course.description %> </p><br>
+                          </div>
+                          <span class="type"> View Course </span>
                         </a>
                         <div class="right-cover"></div>
                         <div class="bottom-cover"></div>

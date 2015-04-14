@@ -1,4 +1,4 @@
-/* Break points */
+/*css/* Break points */
 $desktop: new-breakpoint(max-width 1400px 4);
 $laptop: new-breakpoint(max-width 900px 4);
 $tablet: new-breakpoint(max-width 700px 4);
@@ -21,8 +21,6 @@ $orange: #ed6737;
 }
 
 
-
-
 /* GENERALL STYLES*/
 
 html, body {; 
@@ -33,6 +31,9 @@ html, body {;
   color: $dark-gray!important; 
   padding: 5px 20px ;
   text-transform: uppercase;
+  &:hover {
+    background: shade($orange, 10%);
+  };
 }
 .button-simple-reversed { 
   color: white!important; 
@@ -44,17 +45,44 @@ button, input[type="button"], input[type="reset"], input[type="submit"], button 
   padding: 10px 25px;
 }
 .button {
-  @include linear-gradient(#ff7d47, #ed6737);  
+  background-color: $orange;
   color: white!important; 
   padding: 10px 25px;
   text-shadow: none;
   box-shadow: none;
   border: none;
-  @include border-top-radius(10px);
-  @include border-right-radius(10px);
-  @include border-bottom-radius(10px);
-  @include border-left-radius(10px);
+  @include border-top-radius(5px);
+  @include border-right-radius(5px);
+  @include border-bottom-radius(5px);
+  @include border-left-radius(5px);
 }
+.button-small {
+  background-color: $orange;
+  color: white!important; 
+  padding: 5px 20px;
+  text-shadow: none;
+  box-shadow: none;
+  border: none;
+  @include border-top-radius(5px);
+  @include border-right-radius(5px);
+  @include border-bottom-radius(5px);
+  @include border-left-radius(5px);
+}
+
+
+.button-neutral {
+  @include linear-gradient(#313131, #1e1e20);  
+  color: white!important; 
+  padding: 10px 25px;
+  text-shadow: none;
+  box-shadow: none;
+  border: none;
+  @include border-top-radius(5px);
+  @include border-right-radius(5px);
+  @include border-bottom-radius(5px);
+  @include border-left-radius(5px);
+}
+
 .tcenter {text-align: center;}
 article.type-system-sans hr {width: 100%;}
 .label-switch input[type="checkbox"]:checked + .checkbox { background: $dark-gray;}
@@ -78,6 +106,7 @@ header.navigation ul li.nav-link a {}
 article.type-system-sans .header-page h2 { margin: 0;}
 article.type-system-sans a { color: $orange;}
 .content { margin-bottom: 80px;}
+
 
 /*  HOME PAGE */
 
@@ -115,7 +144,6 @@ header.navigation.navigation-homepage {
   }
 }
 
-
 .logo-quotes {
   text-align: center;
   h1,h2,h3 {
@@ -125,12 +153,26 @@ header.navigation.navigation-homepage {
 }
 
 
+header.navigation ul.submenu{
+  top: 1em;
+  li a{
+      background: $orange;
+      color: white;
+      border-bottom: 1px solid shade($orange, 15%);
+      &:hover{
+        background: shade($orange, 10%);
+        color: white;
+      };
+    }
+}
+
+
+
 
 /* Blocks - Layout */
 
 .container{
   @include outer-container(100%);
-  padding-top: 20px;
 }
 .left_block {
   @include span-columns(4);
@@ -145,22 +187,23 @@ header.navigation.navigation-homepage {
   @include span-columns(8);
   @include media($mobile) {
     @include span-columns(12);
-  }
+  };
 }
 
 .center {
   @include outer-container(60%);
   @include media($laptop) {
     @include outer-container(80%);
-  }
+  };
  }
 
 .form-center {
     @include outer-container(50%);
     padding: 50px;
+    background: #f0f0f0!important; 
     @include media($laptop) {
-    @include outer-container(60%);
-  }
+      @include outer-container(60%);
+    }
 }
 
 .course-overview {
@@ -196,11 +239,13 @@ header.navigation.navigation-homepage {
     @include span-columns(12);
   }
 }
-
-/*
-.course-content {
-  padding: 10%;
-}*/
+.col-4
+{
+  @include span-columns(4);
+  @include media($mobile) {
+    @include span-columns(12);
+  }
+}
 
  .content, .course-searches, .keywords {
   clear: both;
@@ -278,6 +323,13 @@ header.navigation.navigation-homepage {
 
 .nav-user-pic  { 
   line-height: 0;
+  background-image: image-url("user-avatar.png");
+  overflow: hidden;
+  background-position: 0;
+  background-repeat: no-repeat;
+  height: 40px;
+  width: 40px;
+  background-size: contain;
  img { 
     width: 40px; 
     height: 40px;
@@ -285,6 +337,23 @@ header.navigation.navigation-homepage {
     margin-bottom: -15px;
   }
 }
+
+.user-profile-image {
+  height: 150px;
+  width: 150px;
+  background-image: image-url("user-avatar.png");
+  margin-bottom: 20px;
+}
+
+
+
+header.navigation li.more.nav-link > a {
+  padding-right: 0;
+}
+
+
+
+
 
 
 /* Logs */
@@ -443,7 +512,59 @@ button {
   }
 }
 
-.grid-items-lines {min-height: 400px;}
+
+
+/* Courses Index */
+
+.grid-items-lines {
+  min-height: 400px;
+}
+
+.home-grid .course-avatar {
+  width: 100%;
+  height: auto!important;
+}
+.home-grid .grid-item {
+  &:hover{
+    border-bottom: 2px solid $orange;
+    background: white;
+  };
+  height: 23em;
+  .grid-item-description{
+    height: 6em;
+    overflow: hidden;
+    position: relative;
+    &:after{
+      content:"";
+      width: 100%;
+      height: 50px;
+      bottom: 0;
+      position: absolute;
+      background: image-url("fade-bottom.png");
+      background-repeat: repeat-x;
+    }
+  }
+  p { 
+    max-width: 100%;
+  }
+}
+
+.grid-course-image {
+  height: 100px;
+  margin-bottom: 20px;
+  background-image: image-url("course-avatar.jpg");
+  background-position: center;
+  background-size: cover;
+  text-align: center;
+  overflow: hidden;
+}
+
+.course-image-home {
+  width: 100%;
+  height: auto!important;
+  opacity: 1!important;
+  display: inline-block!important;
+}
 
 /* Fade In Element */
 
@@ -610,23 +731,98 @@ float: right;
 
 .course-overview-stats {
   padding: 10px 0;
+  background-color: #f2f2f8;
+  @include border-top-radius(0);
+  @include border-right-radius(0);
+  @include border-bottom-radius(5px);
+  @include border-left-radius(5px);
+  padding: 10px;
 }
 .course-overview-description {
   padding: 20px 0;
 }
 
+.overview-author-image {
+  width: 150px;
+  height: auto;
+}
 
+.author-info {
+  text-align: center;
+  padding: 2em;
+  border: 1px solid $light-gray;
+  h2 {
+    background-color: #f0f0f0; 
+  }
+}
+.bookshelf-saves {
+  padding-left: 20px;
+  display: inline-block;
+}
+
+.course-image-wrapper {
+  background-image: image-url("course-avatar.jpg");
+  padding: 10px;
+  height: 200px;
+  overflow: hidden;
+  background-size: cover;
+  background-position: 0;
+}
+
+
+.course-overview-user-pic {
+  background-image: image-url("user-avatar.png");
+  overflow: hidden;
+  background-position: 0;
+  background-repeat: no-repeat;
+  height: 150px;
+  width: 150px;
+  margin: auto;
+  @include border-top-radius(50%);
+  @include border-right-radius(50%);
+  @include border-bottom-radius(50%);
+  @include border-left-radius(50%);
+  margin-bottom: 20px;
+}
 /* Student Courses */
 
 
 .bookshelf-button {
   padding: 4px 20px;
-  float: right;
-
+  display: inline-block;
   img { vertical-align: middle;}
+  margin: -5px 10px 0;
 }
 
 
+/* Teacher Course */
+.publish-form {
+  display: inline-block; 
+  margin: -4px 10px 0;
+}
+.header-page {
+  min-height: 50px;
+}
+.course-overview-button {
+  display: inline-block; 
+  padding: 6px 20px;
+  margin-top: -2px;
+}
+.course-menu {
+  text-align: right;
+}
+.publish-button {
+  margin-top: -10px;
+}
+
+.image-element {
+  text-align: center;
+}
+.course-image-element {
+  min-width: 50%;
+  max-width: 100%;
+  margin: auto; 
+}
 /* About Page */
 
 .about-section-icons {
@@ -662,7 +858,6 @@ float: right;
  padding: 15px;
  min-height:  300px;
  background-color: white; 
-
 }
 
 .about-content {
@@ -728,8 +923,13 @@ html, body {height: 100%;}
 }
 
 
-
 /*  Chapters and Lesson on Course */
+
+.vertical-tabs-container .vertical-tabs{
+  height: auto!important;
+  overflow: visible;
+}
+
 
 .add-chapter-btn {
   float: left;
@@ -738,21 +938,11 @@ html, body {height: 100%;}
 }
 
 
+
 .editable {
   color: $dark-gray;
   border: 1px dashed $light-gray;
   padding: 8px;
-  iframe {
-    width: 100%;
-    height: 500px;
-    @include media($mobile) {
-      height:159px;
-    }
-    @include media($desktop){
-      height:359px;
-    } 
-  }
-
 }
 .editable-click:hover, a.editable-click:hover {
   color: black;
@@ -764,7 +954,7 @@ html, body {height: 100%;}
   .editable-input {
     width: 100%;
     min-height:150px;
-  }
+  };
 }
 .editable-buttons {
   button {
@@ -779,9 +969,27 @@ html, body {height: 100%;}
       padding: 5px 15px;
       font-size: .9em;
       box-shadow: none;
-    };
+    }
   }
 }
+
+.video-element{
+  iframe {
+    width: 100%;
+    height: 500px;
+    @include media($mobile) {
+      height:159px;
+    }
+    @include media($desktop){
+      height:359px;
+    } 
+  }
+}
+
+
+
+
+
 
 
 

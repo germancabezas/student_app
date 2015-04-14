@@ -97,6 +97,7 @@
         };
         $scope.lessonElements.push(lessonElement);
         // $scope.$apply();
+        $scope.imageUploaderVisible = false;
       };
     };
 
