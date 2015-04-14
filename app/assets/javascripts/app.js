@@ -1,7 +1,7 @@
 (function() {
   "use strict";
  
-  angular.module("app", ['angularFileUpload', 'ngSanitize', 'xeditable']);
+  angular.module("app", ['angularFileUpload', 'ngSanitize', 'xeditable', 'dndLists']);
 
 
   

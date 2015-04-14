@@ -32,21 +32,23 @@
           <% end %>   
         </div>
         <div class="vertical-tab-content-container course-tab-content-container course-content">
-            <div ng-repeat="lessonElement in lessonElements track by $index | orderBy:lessonElement.element_priority:true">
-              <div ng-if="lessonElement.element_type === 'text'">
-                <p editable-textarea="lessonElement.element_text" onbeforesave="updateElement($data)">{{ lessonElement.element_text }}</p>
-              </div>
-              <div ng-if="lessonElement.element_type === 'title'">
-                <h1 editable-textarea="lessonElement.element_text">{{ lessonElement.element_text }}</h1>
-              </div>
-              <div class="image-element" ng-if="lessonElement.element_type === 'image'">
-                <img class="course-image-element" src="{{ lessonElement.element_url }}">
-              </div>
-              <div ng-if="lessonElement.element_type === 'video'">
-                <div class="video-element" editable-textarea="lessonElement.element_text" ng-bind-html="makeTrust(lessonElement.element_text)">
+            <ul dnd-list="lessonElements">
+              <li ng-repeat="lessonElement in lessonElements" dnd-draggable="lessonElement" dnd-moved="changePriority($index)" dnd-effect-allowed="move">
+                <div ng-if="lessonElement.element_type === 'text'">
+                  <p editable-textarea="lessonElement.element_text" onbeforesave="updateElement($data)">{{ lessonElement.element_text }}</p>
                 </div>
-              </div>
-            </div>
+                <div ng-if="lessonElement.element_type === 'title'">
+                  <h1 editable-textarea="lessonElement.element_text">{{ lessonElement.element_text }}</h1>
+                </div>
+                <div class="image-element" ng-if="lessonElement.element_type === 'image'">
+                  <img class="course-image-element" src="{{ lessonElement.element_url }}">
+                </div>
+                <div ng-if="lessonElement.element_type === 'video'">
+                  <div class="video-element" editable-textarea="lessonElement.element_text" ng-bind-html="makeTrust(lessonElement.element_text)">
+                  </div>
+                </div>
+              </li>
+            </ul>
           </div>
           <div>
             <!-- Hidden - triggered elements -->

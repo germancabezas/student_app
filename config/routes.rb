@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   get 'lesson_elements/:id' => 'lesson_elements#show'
   post 'lesson_elements' => 'lesson_elements#save'
   get 'chapter_elements/:id' => 'chapter_elements#show'
+  patch 'chapter_elements/:id' => 'chapter_elements#update'
 
 
 # BELOW CODE IS JUST REFERENCE

@@ -101,6 +101,18 @@
       };
     };
 
+    $scope.changePriority = function(index) {
+      $scope.lessonElements.splice(index, 1);
+      for(var i = 0; i < $scope.lessonElements.length; i++) {
+        var lessonElement = $scope.lessonElements[i]
+        lessonElement.element_priority = i;
+        $http.patch('/chapter_elements/' + $scope.lessonElements[i].id + '.json', {id: lessonElement.id, element_priority: i}).then(function(response) {
+          
+        });
+      }
+
+    };
+
 
 
 

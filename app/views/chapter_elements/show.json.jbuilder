@@ -1,4 +1,5 @@
 json.elements @chapter_elements.each do|element|
+  json.id element.id
   json.element_type element.element_type
   json.element_text element.text
   json.element_url element.url.url

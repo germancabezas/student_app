@@ -15,6 +15,7 @@
 //= require angular
 //= require angular-file-upload
 //= require angular_sanitize
+//= require angular-drag-and-drop-lists
 //= require xeditable
 //= require app
 //= require_tree .
