@@ -32,26 +32,25 @@
           <% end %>   
         </div>
         <div class="vertical-tab-content-container course-tab-content-container course-content">
-            <ul dnd-list="lessonElements">
-              <li ng-repeat="lessonElement in lessonElements" dnd-draggable="lessonElement" dnd-moved="changePriority($index)" dnd-effect-allowed="move">
-                <div ng-if="lessonElement.element_type === 'text'">
-                  <p editable-textarea="lessonElement.element_text" onbeforesave="updateElement($data)">{{ lessonElement.element_text }}</p>
+          <ul dnd-list="lessonElements">
+            <li ng-repeat="lessonElement in lessonElements" dnd-draggable="lessonElement" dnd-moved="changePriority($index)" dnd-effect-allowed="move">
+              <div ng-if="lessonElement.element_type === 'text'">
+                <p editable-textarea="lessonElement.element_text" onbeforesave="updateElement($data)">{{ lessonElement.element_text }}</p>
+              </div>
+              <div ng-if="lessonElement.element_type === 'title'">
+                <h1 editable-textarea="lessonElement.element_text">{{ lessonElement.element_text }}</h1>
+              </div>
+              <div class="image-element" ng-if="lessonElement.element_type === 'image'">
+                <img class="course-image-element" src="{{ lessonElement.element_url }}">
+              </div>
+              <div ng-if="lessonElement.element_type === 'video'">
+                <div class="video-element" editable-textarea="lessonElement.element_text" ng-bind-html="makeTrust(lessonElement.element_text)">
                 </div>
-                <div ng-if="lessonElement.element_type === 'title'">
-                  <h1 editable-textarea="lessonElement.element_text">{{ lessonElement.element_text }}</h1>
-                </div>
-                <div class="image-element" ng-if="lessonElement.element_type === 'image'">
-                  <img class="course-image-element" src="{{ lessonElement.element_url }}">
-                </div>
-                <div ng-if="lessonElement.element_type === 'video'">
-                  <div class="video-element" editable-textarea="lessonElement.element_text" ng-bind-html="makeTrust(lessonElement.element_text)">
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </div>
-          <div>
+              </div>
+            </li>
+          </ul>
             <!-- Hidden - triggered elements -->
+          <div class="triggered-elements">
             <div id="text-form" ng-if="textFormVisible">
               <textarea ng-model="newText" placeholder="Enter Your Content Here"> </textarea>
               <button ng-click="saveText(newText)" class="button">Save</button>
@@ -65,28 +64,28 @@
               <button ng-click="saveVideo(newVideo)" class="button">Save</button>
             </div>
             <!-- Uploader -->
-                <div id="image-field" ng-if="imageUploaderVisible" >
-                  <div ng-init="uploadImage()">
-                    <input type="file" nv-file-select="" uploader="uploader" multiple /><br/>
-                    <ul>
-                        <li ng-repeat="item in uploader.queue">
-                            Name: <span ng-bind="item.file.name"></span><br/>
-                            <div ng-show="uploader.isHTML5" ng-thumb="{ file: item._file, height: 100 }"></div>
-                        </li>
-                    </ul>
-                    <button type="button" class="btn btn-success btn-s" ng-click="uploader.uploadAll()" ng-disabled="!uploader.getNotUploadedItems().length">
-                        <span class="glyphicon glyphicon-upload"></span> Upload all
-                    </button>
-                    <div class="progress" style="">
-                        <div class="progress-bar" role="progressbar" ng-style="{ 'width': uploader.progress + '%' }"></div>
-                    </div>
-                  </div>
+            <div id="image-field" ng-if="imageUploaderVisible" >
+              <div ng-init="uploadImage()">
+                <input type="file" nv-file-select="" uploader="uploader" multiple /><br/>
+                <ul>
+                    <li ng-repeat="item in uploader.queue">
+                        Name: <span ng-bind="item.file.name"></span><br/>
+                        <div ng-show="uploader.isHTML5" ng-thumb="{ file: item._file, height: 100 }"></div>
+                    </li>
+                </ul>
+                <button type="button" class="btn btn-success btn-s" ng-click="uploader.uploadAll()" ng-disabled="!uploader.getNotUploadedItems().length">
+                    <span class="glyphicon glyphicon-upload"></span> Upload all
+                </button>
+                <div class="progress" style="">
+                    <div class="progress-bar" role="progressbar" ng-style="{ 'width': uploader.progress + '%' }"></div>
                 </div>
-            <!-- End Uploader -->
+              </div>
+            </div>
+          </div>
+          <!-- end of trigered elements -->
         </div>
       </div>
-  <!-- TOOL BAR -->
-  </article>
+    </article>
   <% end %>
   <%=render "partials/toolbar"%>
 </div>

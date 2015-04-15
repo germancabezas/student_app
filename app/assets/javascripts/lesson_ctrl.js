@@ -24,12 +24,19 @@
       $scope.titleFormVisible = true;
     };
     $scope.saveTitle = function(newTitle) {
+      var array = [];
+      for (var i = 0; i < $scope.lessonElements.length; i++) {
+        array.push($scope.lessonElements[i].element_priority)
+      };
+      $scope.lastPriority = array[array.length - 1] +1;
       var lessonElement = {
         element_type: "title",
         element_text: newTitle,
         lesson_id: $scope.lessonId,
-        chapter_id: $scope.chapterId
+        chapter_id: $scope.chapterId,
+        element_priority: $scope.lastPriority
       };
+
       $http.post('/lesson_elements.json', lessonElement).then(function(response) {
           $scope.lessonElements.push(lessonElement)
         });
@@ -96,7 +103,6 @@
           chapter_id: $scope.chapterId
         };
         $scope.lessonElements.push(lessonElement);
-        // $scope.$apply();
         $scope.imageUploaderVisible = false;
       };
     };
