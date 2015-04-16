@@ -31,9 +31,6 @@ html, body {;
   color: $dark-gray!important; 
   padding: 5px 20px ;
   text-transform: uppercase;
-  &:hover {
-    background: shade($orange, 10%);
-  };
 }
 .button-simple-reversed { 
   color: white!important; 
@@ -415,6 +412,7 @@ button {
 
 
 
+
 /* =======  Course Page =========*/
 
 
@@ -458,6 +456,10 @@ button {
 }
 .vertical-tabs-container .vertical-tab-content.course-tab-content {
   background-color: #ffffff;
+}
+
+.vertical-tabs-container .vertical-tab.is-active{
+  margin-left: 24px;
 }
 
 .vertical-tabs-container {

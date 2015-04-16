@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   # API 
   get 'lesson_elements/:id' => 'lesson_elements#show'
   post 'lesson_elements' => 'lesson_elements#save'
+  delete '/lesson_elements/:id' =>'lesson_elements#destroy'
   get 'chapter_elements/:id' => 'chapter_elements#show'
   patch 'chapter_elements/:id' => 'chapter_elements#update'
 

@@ -10,5 +10,12 @@ class LessonElementsController < ApplicationController
     @new_lesson_element.save
     p params
   end
+  def destroy
+    @lesson_element = LessonElement.find(params[:id])
+    @lesson_element.destroy
+    flash[:warning] = "Element deleted"
+    redirect_to "/"
+    
+  end
 end
 

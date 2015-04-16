@@ -23,9 +23,18 @@
     <article class="type-system-sans"> 
       <div class="vertical-tabs-container course-tabs">
         <div class="vertical-tabs">
-          <% course.chapters.each do |chapter| %>
+          <% course.chapters.each_with_index do |chapter, index| %>
             <a class="add-lesson" href="/courses/<%= course.id %>/chapters/<%= chapter.id %>/lesson/new">+</a>
-            <a ng-click="fetchChapter(<%=chapter.id%>)" href="javascript:void(0)" class="chapter-tab js-vertical-tab vertical-tab" rel="<%='chapter' + chapter.id.to_s %>"><%= chapter.name %> </a> 
+
+            <% if index == 0 %>
+
+              <a id="first-tab" ng-click="fetchChapter(<%=chapter.id%>)" href="javascript:void(0)" class="chapter-tab js-vertical-tab vertical-tab" rel="<%='chapter' + chapter.id.to_s %>"><%= chapter.name %> </a> 
+
+            <% else %>
+
+              <a ng-click="fetchChapter(<%=chapter.id%>)" href="javascript:void(0)" class="chapter-tab js-vertical-tab vertical-tab" rel="<%='chapter' + chapter.id.to_s %>"><%= chapter.name %> </a> 
+
+            <% end %>   
               <% chapter.lessons.each do |lesson| %>
                 <a ng-click="fetchLesson(<%=lesson.id%>)" href="javascript:void(0)" class="js-vertical-tab vertical-tab lesson-tab" rel="<%='lesson' + lesson.id.to_s %>"><%= lesson.name %> </a>
               <% end %>
@@ -33,7 +42,7 @@
         </div>
         <div class="vertical-tab-content-container course-tab-content-container course-content">
           <ul dnd-list="lessonElements">
-            <li ng-repeat="lessonElement in lessonElements" dnd-draggable="lessonElement" dnd-moved="changePriority($index)" dnd-effect-allowed="move">
+            <li ng-repeat="lessonElement in lessonElements" dnd-draggable="lessonElement" dnd-moved="changePriority($index)" dnd-effect-allowed="move">    
               <div ng-if="lessonElement.element_type === 'text'">
                 <p editable-textarea="lessonElement.element_text" onbeforesave="updateElement($data)">{{ lessonElement.element_text }}</p>
               </div>
@@ -53,15 +62,18 @@
           <div class="triggered-elements">
             <div id="text-form" ng-if="textFormVisible">
               <textarea ng-model="newText" placeholder="Enter Your Content Here"> </textarea>
-              <button ng-click="saveText(newText)" class="button">Save</button>
+              <button ng-click="saveText(newText)" class="button button-small">Save</button>
+              <button ng-click="cancelNewText()" class="button button-small">Cancel</button>
             </div>
             <div id="title-form" ng-if="titleFormVisible">
               <textarea ng-model="newTitle" placeholder="Enter Your Title Here"> </textarea>
-              <button ng-click="saveTitle(newTitle)" class="button">Save</button>
+              <button ng-click="saveTitle(newTitle)" class="button button-small">Save</button>
+              <button ng-click="cancelNewTitle()" class="button button-small">Cancel</button>
             </div>
             <div id="video-field" ng-if="videoFieldVisible">
               <textarea ng-model="newVideo" placeholder="Copy your embeded code here"> </textarea>
-              <button ng-click="saveVideo(newVideo)" class="button">Save</button>
+              <button ng-click="saveVideo(newVideo)" class="button button-small">Save</button>
+              <button ng-click="cancelNewVideo()" class="button button-small">Cancel</button>
             </div>
             <!-- Uploader -->
             <div id="image-field" ng-if="imageUploaderVisible" >
@@ -73,9 +85,10 @@
                         <div ng-show="uploader.isHTML5" ng-thumb="{ file: item._file, height: 100 }"></div>
                     </li>
                 </ul>
-                <button type="button" class="btn btn-success btn-s" ng-click="uploader.uploadAll()" ng-disabled="!uploader.getNotUploadedItems().length">
-                    <span class="glyphicon glyphicon-upload"></span> Upload all
+                <button type="button" class="btn button-small btn-success btn-s" ng-click="uploader.uploadAll()" ng-disabled="!uploader.getNotUploadedItems().length">
+                    <span class="glyphicon glyphicon-upload"></span> Upload
                 </button>
+                <button ng-click="cancelNewUploader()" class="button button-small">Cancel</button>
                 <div class="progress" style="">
                     <div class="progress-bar" role="progressbar" ng-style="{ 'width': uploader.progress + '%' }"></div>
                 </div>
@@ -91,6 +104,14 @@
 </div>
 
    
+<script>
+(function(){
+     var clickTab = function() {
+      document.getElementById("first-tab").click();
+    };
+    window.onload = clickTab;
 
+ })();
+ </script>
 
 

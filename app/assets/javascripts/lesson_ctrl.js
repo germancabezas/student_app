@@ -11,7 +11,6 @@
       });
     };
 
-
     $scope.fetchChapter = function(id) {
       $http.get("/chapter_elements/" + id + ".json").then(function(response) {
         $scope.lessonElements = response.data["elements"];
@@ -22,6 +21,9 @@
 
     $scope.showTitleForm = function() {
       $scope.titleFormVisible = true;
+    };
+    $scope.cancelNewTitle = function() {
+      $scope.titleFormVisible = false;
     };
     $scope.saveTitle = function(newTitle) {
       var array = [];
@@ -47,16 +49,26 @@
     $scope.showTextForm = function() {
       $scope.textFormVisible = true;
     };
+    $scope.cancelNewText = function() {
+      $scope.textFormVisible = false;
+    };
+
     $scope.saveText = function(newText) {
+      var array = [];
+      for (var i = 0; i < $scope.lessonElements.length; i++) {
+        array.push($scope.lessonElements[i].element_priority)
+      };
+      $scope.lastPriority = array[array.length - 1] +1;
       var lessonElement = {
         element_type: "text",
         element_text: newText,
         lesson_id: $scope.lessonId,
-        chapter_id: $scope.chapterId
+        chapter_id: $scope.chapterId,
+        element_priority: $scope.lastPriority
       };
       $http.post('/lesson_elements.json', lessonElement).then(function(response) {
           $scope.lessonElements.push(lessonElement)
-        });
+      });
       $scope.textFormVisible = false;
     };
 
@@ -65,12 +77,21 @@
     $scope.showVideoField = function() {
       $scope.videoFieldVisible = true;
     };
+    $scope.cancelNewVideo = function() {
+      $scope.videoFieldVisible = false;
+    };
     $scope.saveVideo = function(newVideo) {
+      var array = [];
+      for (var i = 0; i < $scope.lessonElements.length; i++) {
+        array.push($scope.lessonElements[i].element_priority)
+      };
+      $scope.lastPriority = array[array.length - 1] +1;
       var lessonElement = {
         element_type: "video",
         element_text: newVideo,
         lesson_id: $scope.lessonId,
-        chapter_id: $scope.chapterId
+        chapter_id: $scope.chapterId,
+        element_priority: $scope.lastPriority
       };
       $http.post('/lesson_elements.json', lessonElement).then(function(response) {
           $scope.lessonElements.push(lessonElement)
@@ -86,8 +107,14 @@
     $scope.showUploader = function() {
       $scope.imageUploaderVisible = true;
     };
+    $scope.cancelNewUploader = function() {
+      $scope.imageUploaderVisible = false;
+    };
 
     $scope.uploadImage = function() {
+ 
+     // This is to save the url
+
       if ($scope.lessonId) {
         $scope.uploader = new FileUploader({url: '/lesson_elements.json?lesson_id='+ $scope.lessonId + '&element_type=image'} );
       } else if ($scope.chapterId) {
@@ -96,14 +123,28 @@
 
       $scope.uploader.onSuccessItem = function(item, response, status, headers) {
 
+        // Saving the priority of the new element
+        // var array = [];
+        // for (var i = 0; i < $scope.lessonElements.length; i++) {
+        //   array.push($scope.lessonElements[i].element_priority)
+        // };
+
         var lessonElement = {
           element_type: "image",
           element_url: response.element_url,
           lesson_id: $scope.lessonId,
-          chapter_id: $scope.chapterId
+          chapter_id: $scope.chapterId,
         };
         $scope.lessonElements.push(lessonElement);
         $scope.imageUploaderVisible = false;
+        //
+        for(var i = 0; i < $scope.lessonElements.length; i++) {
+          var lessonElement = $scope.lessonElements[i]
+          lessonElement.element_priority = i;
+          $http.patch('/chapter_elements/' + $scope.lessonElements[i].id + '.json', {id: lessonElement.id, element_priority: i}).then(function(response) {
+          });
+        }
+        //
       };
     };
 
@@ -113,7 +154,6 @@
         var lessonElement = $scope.lessonElements[i]
         lessonElement.element_priority = i;
         $http.patch('/chapter_elements/' + $scope.lessonElements[i].id + '.json', {id: lessonElement.id, element_priority: i}).then(function(response) {
-          
         });
       }
 

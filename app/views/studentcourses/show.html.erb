@@ -24,8 +24,12 @@
     <article class="type-system-sans"> 
       <div class="vertical-tabs-container course-tabs">
         <div class="vertical-tabs">
-          <% @course.chapters.each do |chapter| %>
+          <% @course.chapters.each_with_index do |chapter, index| %>
+          <% if index == 0 %>
+            <a id="first-tab" ng-click="fetchChapter(<%=chapter.id%>)" href="javascript:void(0)" class="chapter-tab js-vertical-tab vertical-tab" rel="<%='chapter' + chapter.id.to_s %>"><%= chapter.name %> </a>
+          <% else %>
             <a ng-click="fetchChapter(<%=chapter.id%>)" href="javascript:void(0)" class="chapter-tab js-vertical-tab vertical-tab" rel="<%='chapter' + chapter.id.to_s %>"><%= chapter.name %> </a>
+          <% end %> 
               <% chapter.lessons.each do |lesson| %>
                 <a ng-click="fetchLesson(<%=lesson.id%>)" href="javascript:void(0)" class="js-vertical-tab vertical-tab lesson-tab" rel="<%='lesson' + lesson.id.to_s %>"><%= lesson.name %> </a>
               <% end %>
@@ -57,4 +61,12 @@
    
 
 
+<script>
+(function(){
+     var clickTab = function() {
+      document.getElementById("first-tab").click();
+    };
+    window.onload = clickTab;
 
+ })();
+ </script>
